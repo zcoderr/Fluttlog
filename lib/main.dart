@@ -50,6 +50,7 @@ class SiteState extends State<Site> {
             SiteHeader(
               title: 'Title',
               desc: 'Desc...',
+              cover: 'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
             ),
             Positioned(
               bottom: 0,

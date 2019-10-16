@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blog/widgets/SiteHeader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -39,6 +40,37 @@ class _DetailPageState extends State<DetailPage> {
   Widget buildPostBody() {
     return ListView(
       children: <Widget>[
+        Stack(
+          children: <Widget>[
+            SiteHeader(
+              title: widget.post['title'],
+              desc: widget.post['desc'],
+              cover: widget.post['thumb'],
+              decoration: new BoxDecoration(
+                gradient: new LinearGradient(
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(0.0, 1.0),
+                  colors: <Color>[
+                    Colors.grey.shade600.withOpacity(0.2),
+                    Colors.grey.shade600.withOpacity(0.5),
+                    //const Color(0xff000000),
+                    //const Color(0xff000000)
+                  ],
+                ),
+              ),
+            ),
+            RaisedButton(
+              child: Image.asset(
+                "images/icon_back.png",
+                width: 50,
+                height: 50,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
         Center(
           child: Container(
             constraints: BoxConstraints(maxWidth: 1000),

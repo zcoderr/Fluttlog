@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:blog/pages/AboutPage.dart';
 import 'package:blog/pages/DetailPage.dart';
-import 'package:blog/pages/HomePage.dart';
+import 'package:blog/pages/PostList.dart';
 import 'package:blog/pages/PhotoPage.dart';
 import 'package:blog/pages/PostPage.dart';
 import 'package:blog/widgets/SiteHeader.dart';
@@ -35,6 +35,7 @@ class SiteState extends State<Site> {
   static final List<String> items = [
     'Home',
     'Post',
+    'Tech',
     'Photo',
     'About',
   ];
@@ -48,9 +49,12 @@ class SiteState extends State<Site> {
         Stack(
           children: <Widget>[
             SiteHeader(
-              title: 'Title',
-              desc: 'Desc...',
-              cover: 'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
+              title: 'Zachary\'s Blog',
+              desc: 'Just Empty！',
+              cover: Image.network(
+                'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
+                fit: BoxFit.cover,
+              ),
             ),
             Positioned(
               bottom: 0,
@@ -69,9 +73,18 @@ class SiteState extends State<Site> {
         ),
         IndexedStack(
           children: <Widget>[
-            HomePage(),
-            PostPage(),
-            PhotoPage(),
+            PostList(
+              catalog: "all",
+            ),
+            PostList(
+              catalog: "post",
+            ),
+            PostList(
+              catalog: "tech",
+            ),
+            PostList(
+              catalog: "photo",
+            ),
             AboutPage(),
           ],
           index: tabIndex,

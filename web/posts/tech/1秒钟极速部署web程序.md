@@ -1,17 +1,4 @@
----
-title: 1秒钟，极速部署web程序！
-image: https://images.unsplash.com/photo-1505562130589-9879683e72da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80
-publish: 2017-01-11 22:09:34
-type: post  
-categories:
-  - tech
-readingTime: 10 Minutes
----
-
-
 # 1秒钟，极速部署web程序！
-
-
 
 在开发过程中，修改完代码后部署到服务器是一件头疼的事，每一次部署都要上传代码，重启程序，
 <!-- more -->

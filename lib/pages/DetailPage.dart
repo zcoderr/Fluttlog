@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:markdown/markdown.dart' as markdown;
-import 'package:flutter_html/flutter_html.dart' as html;
+import 'package:flutter_html/flutter_html.dart' as flutter_html;
 import 'package:html/dom.dart' as dom;
+import 'dart:html' as html;
 
 class DetailPage extends StatefulWidget {
   final Map post;
@@ -29,6 +30,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   String _postContent;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +47,13 @@ class _DetailPageState extends State<DetailPage> {
             SiteHeader(
               title: widget.post['title'],
               desc: widget.post['desc'],
-              cover: widget.post['thumb'],
+              cover: Hero(
+                tag: widget.post['title'],
+                child: Image.network(
+                  widget.post['thumb'],
+                  fit: BoxFit.cover,
+                ),
+              ),
               decoration: new BoxDecoration(
                 gradient: new LinearGradient(
                   begin: const FractionalOffset(0.0, 0.0),
@@ -59,26 +67,25 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
-            RaisedButton(
+            InkWell(
               child: Image.asset(
                 "images/icon_back.png",
-                width: 50,
-                height: 50,
               ),
-              onPressed: () {
+              onTap: () {
                 Navigator.pop(context);
               },
-            ),
+            )
           ],
         ),
         Center(
           child: Container(
             constraints: BoxConstraints(maxWidth: 1000),
             padding: EdgeInsets.only(left: 35, right: 35, bottom: 50),
-            child: html.Html(
+            child: flutter_html.Html(
               data: markdown.markdownToHtml(_postContent),
               onLinkTap: (url) {
-                print("Opening $url...");
+                //js.context.callMethod("open",[url]);
+                html.window.open(url, "");
               },
               padding: EdgeInsets.all(10.0),
               linkStyle: const TextStyle(

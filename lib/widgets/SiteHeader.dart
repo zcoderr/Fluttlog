@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SiteHeader extends StatelessWidget {
   final String title;
   final String desc;
-  final String cover;
+  final Widget cover;
   final Decoration decoration;
 
   SiteHeader({Key key, this.title, this.desc, this.cover,this.decoration}) : super(key: key);
@@ -16,10 +16,7 @@ class SiteHeader extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            child: Image.network(
-              cover,
-              fit: BoxFit.cover,
-            ),
+            child: cover,
           ),
           Container(
             decoration:decoration,

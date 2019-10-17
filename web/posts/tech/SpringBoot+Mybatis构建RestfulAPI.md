@@ -1,13 +1,3 @@
----
-title: SpringBoot+Mybatis构建RestfulAPI
-image: https://picsum.photos/1920/1080/?random&date=2018-04-16
-publish: 2016-04-15
-type: post
-categories:
-  - tech
-readingTime: 10 Minutes
----
-
 # SpringBoot+Mybatis构建RestfulAPI
 
 ### 一、项目结构

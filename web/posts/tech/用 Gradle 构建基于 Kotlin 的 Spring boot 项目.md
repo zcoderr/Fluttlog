@@ -1,21 +1,8 @@
----
-title: 用 Gradle 构建基于 Kotlin 的 Spring boot 项目
-image: https://picsum.photos/1080/720?grayscale
-publish: 2018-04-15
-type: post
-categories:
-  - tech
-readingTime: Beijing
----
-
-## 用 Gradle 构建基于 Kotlin 的 Spring boot 项目
-
 #### 一、配置本地Gradle
 
 1. 官网下载Gradle压缩包
 2. 解压到/usr/local/bin目录
 3. 添加gradle的环境变量
-
 
 
 #### 二、新建项目
@@ -27,13 +14,11 @@ readingTime: Beijing
 5. 选择 Use local gradle distribution 并填写正确的 Gradle home 路径，ok
 
 
-
 #### 三、配置 build.gradle
 
 ​	进入项目后，更改工程 build.gradle 文件中的仓库以加快 gradle 依赖的加载速度。国内仓库：
 
  `maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}`
-
 
 
 #### 四、部署配置

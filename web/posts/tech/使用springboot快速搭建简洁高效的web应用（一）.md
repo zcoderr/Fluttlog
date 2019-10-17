@@ -1,13 +1,3 @@
----
-title: 使用springboot快速搭建简洁高效的web应用（一）
-image: https://picsum.photos/1920/1080/?random&date=2018-04-10
-publish: 2016-04-07
-type: post
-categories:
-  - tech
-readingTime: 10 Minutes
----
-
 
 　　Spring的繁琐的配置简直是每个项目开始的时候都会吐槽的地方，特别是对于较为小型的项目，或者是个人项目，过于繁琐的配置就更显得多余了。Spring boot是Spring推出的一个轻量化web框架，主要解决了Spring对于小型项目饱受诟病的配置和开发速度问题。
 

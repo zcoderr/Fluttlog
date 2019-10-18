@@ -1,6 +1,6 @@
 # blog
 
-A new Flutter project.
+A static blog system build by Flutter for web.
 
 ## Getting Started
 

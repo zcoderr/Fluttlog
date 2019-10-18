@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:blog/widgets/SiteHeader.dart';
+import 'package:blog/widgets/PostHeader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -11,8 +11,9 @@ import 'dart:html' as html;
 
 class DetailPage extends StatefulWidget {
   final Map post;
+  final String catalog;
 
-  const DetailPage({Key key, this.post}) : super(key: key);
+  const DetailPage({Key key, this.post,this.catalog}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -44,11 +45,11 @@ class _DetailPageState extends State<DetailPage> {
       children: <Widget>[
         Stack(
           children: <Widget>[
-            SiteHeader(
+            PostHeader(
               title: widget.post['title'],
               desc: widget.post['desc'],
               cover: Hero(
-                tag: widget.post['title'],
+                tag: widget.catalog + widget.post['path'],
                 child: Image.network(
                   widget.post['thumb'],
                   fit: BoxFit.cover,

@@ -1,12 +1,7 @@
-import 'dart:convert';
 import 'package:blog/pages/AboutPage.dart';
-import 'package:blog/pages/DetailPage.dart';
-import 'package:blog/pages/PostList.dart';
-import 'package:blog/pages/PhotoPage.dart';
-import 'package:blog/pages/PostPage.dart';
+import 'package:blog/widgets/PostList.dart';
 import 'package:blog/widgets/SiteHeader.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 void main() => runApp(FlutterBlog());
 
@@ -17,7 +12,7 @@ class FlutterBlog extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      title: 'Get HD Favicon',
+      title: 'Zachary\'s Blog',
       home: Scaffold(body: Site()),
     );
   }
@@ -51,10 +46,6 @@ class SiteState extends State<Site> {
             SiteHeader(
               title: 'Zachary\'s Blog',
               desc: 'Just Empty！',
-              cover: Image.network(
-                'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
-                fit: BoxFit.cover,
-              ),
             ),
             Positioned(
               bottom: 0,

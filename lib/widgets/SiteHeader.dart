@@ -10,7 +10,7 @@ class SiteHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 270,
+      height: 300,
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[

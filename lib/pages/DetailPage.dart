@@ -13,7 +13,7 @@ class DetailPage extends StatefulWidget {
   final Map post;
   final String catalog;
 
-  const DetailPage({Key key, this.post,this.catalog}) : super(key: key);
+  const DetailPage({Key key, this.post, this.catalog}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -41,93 +41,90 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Widget buildPostBody() {
-    return ListView(
+    return Stack(
       children: <Widget>[
-        Stack(
+        ListView(
           children: <Widget>[
-            PostHeader(
-              title: widget.post['title'],
-              desc: widget.post['desc'],
-              cover: Hero(
-                tag: widget.catalog + widget.post['path'],
-                child: Image.network(
-                  widget.post['thumb'],
-                  fit: BoxFit.cover,
+            Stack(
+              children: <Widget>[
+                PostHeader(
+                  title: widget.post['title'],
+                  desc: widget.post['desc'],
+                  cover: Hero(
+                    tag: widget.catalog + widget.post['path'],
+                    child: Image.network(
+                      widget.post['thumb'],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
-              decoration: new BoxDecoration(
-                gradient: new LinearGradient(
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(0.0, 1.0),
-                  colors: <Color>[
-                    Colors.grey.shade600.withOpacity(0.2),
-                    Colors.grey.shade600.withOpacity(0.5),
-                    //const Color(0xff000000),
-                    //const Color(0xff000000)
-                  ],
+              ],
+            ),
+            Center(
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 1000),
+                padding: EdgeInsets.only(left: 25, right: 25, bottom: 50),
+                child: flutter_html.Html(
+                  data: markdown.markdownToHtml(_postContent),
+                  onLinkTap: (url) {
+                    //js.context.callMethod("open",[url]);
+                    html.window.open(url, "");
+                  },
+                  padding: EdgeInsets.all(10.0),
+                  linkStyle: const TextStyle(
+                    color: Colors.green,
+                    decorationColor: Colors.redAccent,
+                    // decoration: TextDecoration.underline,
+                  ),
+                  onImageTap: (src) {
+                    print(src);
+                  },
+                  customRender: (node, children) {
+                    if (node is dom.Element) {
+                      switch (node.localName) {
+                        case "custom_tag":
+                          return Column(children: children);
+                      }
+                    }
+                    return null;
+                  },
+                  customTextAlign: (dom.Node node) {
+                    if (node is dom.Element) {
+                      switch (node.localName) {
+                        case "p":
+                          return TextAlign.justify;
+                      }
+                    }
+                    return null;
+                  },
+                  customTextStyle: (dom.Node node, TextStyle baseStyle) {
+                    if (node is dom.Element) {
+                      switch (node.localName) {
+                        case "p":
+                          return baseStyle
+                              .merge(TextStyle(height: 2, fontSize: 20));
+                      }
+                    }
+                    return baseStyle;
+                  },
                 ),
               ),
             ),
-            InkWell(
-              child: Image.asset(
-                "images/icon_back.png",
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            )
           ],
         ),
-        Center(
+        InkWell(
           child: Container(
-            constraints: BoxConstraints(maxWidth: 1000),
-            padding: EdgeInsets.only(left: 35, right: 35, bottom: 50),
-            child: flutter_html.Html(
-              data: markdown.markdownToHtml(_postContent),
-              onLinkTap: (url) {
-                //js.context.callMethod("open",[url]);
-                html.window.open(url, "");
-              },
-              padding: EdgeInsets.all(10.0),
-              linkStyle: const TextStyle(
-                color: Colors.green,
-                decorationColor: Colors.redAccent,
-                // decoration: TextDecoration.underline,
-              ),
-              onImageTap: (src) {
-                print(src);
-              },
-              customRender: (node, children) {
-                if (node is dom.Element) {
-                  switch (node.localName) {
-                    case "custom_tag":
-                      return Column(children: children);
-                  }
-                }
-                return null;
-              },
-              customTextAlign: (dom.Node node) {
-                if (node is dom.Element) {
-                  switch (node.localName) {
-                    case "p":
-                      return TextAlign.justify;
-                  }
-                }
-                return null;
-              },
-              customTextStyle: (dom.Node node, TextStyle baseStyle) {
-                if (node is dom.Element) {
-                  switch (node.localName) {
-                    case "p":
-                      return baseStyle
-                          .merge(TextStyle(height: 2, fontSize: 20));
-                  }
-                }
-                return baseStyle;
-              },
+            padding: EdgeInsets.only(left: 20, top: 20),
+            child: Image.asset(
+              "images/icon_back.png",
+              width: 50,
+              height: 50,
             ),
           ),
-        ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        )
       ],
     );
   }

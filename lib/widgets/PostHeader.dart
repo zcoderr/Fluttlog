@@ -4,22 +4,31 @@ class PostHeader extends StatelessWidget {
   final String title;
   final String desc;
   final Widget cover;
-  final Decoration decoration;
 
-  PostHeader({Key key, this.title, this.desc, this.cover,this.decoration}) : super(key: key);
+
+  PostHeader({Key key, this.title, this.desc, this.cover}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 270,
+      constraints: BoxConstraints(maxHeight: 400),
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
+          cover,
           Container(
-            child: cover,
-          ),
-          Container(
-            decoration:decoration,
+            decoration:BoxDecoration(
+                gradient:  LinearGradient(
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(0.0, 1.0),
+                  colors: <Color>[
+                    Colors.grey.shade600.withOpacity(0.2),
+                    Colors.grey.shade600.withOpacity(0.5),
+                    //const Color(0xff000000),
+                    //const Color(0xff000000)
+                  ],
+                ),
+              ),
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:blog/model/post_info_data.dart';
 import 'package:blog/pages/DetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +18,7 @@ class PostList extends StatefulWidget {
 }
 
 class PostListState extends State<PostList> {
-  List posts = [];
+  List<PostInfo> posts = [];
 
   @override
   void initState() {
@@ -27,10 +28,6 @@ class PostListState extends State<PostList> {
 
   @override
   Widget build(BuildContext context) {
-    return getListItems();
-  }
-
-  Widget getListItems() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,7 +43,7 @@ class PostListState extends State<PostList> {
     return result;
   }
 
-  Widget getListItem(Map post) {
+  Widget getListItem(PostInfo post) {
     return InkWell(
       onTap: () {
         toDetailPage(post);
@@ -60,7 +57,7 @@ class PostListState extends State<PostList> {
     );
   }
 
-  toDetailPage(Map post) {
+  toDetailPage(PostInfo post) {
     Navigator.push(
         context,
         MaterialPageRoute<void>(
@@ -71,12 +68,12 @@ class PostListState extends State<PostList> {
           ),
         ));
 
-      // Navigator.pushNamed(context, "/post",
-      //     arguments: PostRouteArguments(
-      //       post: post,
-      //       catalog: widget.catalog,
-      //     ));
-      //String path = "/post/" + post['title'];
+    // Navigator.pushNamed(context, "/post",
+    //     arguments: PostRouteArguments(
+    //       post: post,
+    //       catalog: widget.catalog,
+    //     ));
+    //String path = "/post/" + post['title'];
   }
 
   loadPostsData() {
@@ -85,18 +82,22 @@ class PostListState extends State<PostList> {
       JsonDecoder jsonDecoder = JsonDecoder();
       Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
 
+      List jsonList = respMap['data'];
+
+      List<PostInfo> postInfoList =
+          jsonList.map((e) => PostInfo.fromJson(e)).toList();
       // 解析数据
-      List postsData = respMap['data'];
-      if (postsData.isNotEmpty) {
+
+      if (postInfoList.length > 0) {
         if (widget.catalog != "all") {
-          postsData.forEach((post) {
-            if (post['catalog'] == widget.catalog) {
+          postInfoList.forEach((post) {
+            if (post.catalog == widget.catalog) {
               posts.add(post);
-              print(post['title']);
+              print(post.title);
             }
           });
         } else {
-          posts = postsData;
+          posts = postInfoList;
         }
 
         setState(() {});
@@ -106,7 +107,7 @@ class PostListState extends State<PostList> {
     });
   }
 
-  Widget buildMaxPostCard(Map post) {
+  Widget buildMaxPostCard(PostInfo post) {
     return Container(
       height: 300,
       padding: EdgeInsets.only(
@@ -140,7 +141,7 @@ class PostListState extends State<PostList> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Text(
-                          post['title'],
+                          post.title,
                           style: TextStyle(
                               fontSize: 25,
                               color: Colors.black,
@@ -149,7 +150,7 @@ class PostListState extends State<PostList> {
                         Container(
                           padding: EdgeInsets.only(top: 40),
                           child: Text(
-                            post['location'],
+                            post.location,
                             style: TextStyle(color: Colors.grey, fontSize: 14),
                           ),
                         ),
@@ -158,8 +159,8 @@ class PostListState extends State<PostList> {
                   ),
                   Expanded(
                     child: Hero(
-                      tag: widget.catalog + post['path'],
-                      child: Image.network(post['thumb'],
+                      tag: widget.catalog + post.path,
+                      child: Image.network(post.thumb,
                           height: 300, fit: BoxFit.cover),
                     ),
                   ),
@@ -172,7 +173,7 @@ class PostListState extends State<PostList> {
     );
   }
 
-  Widget buildMinPostCard(Map post) {
+  Widget buildMinPostCard(PostInfo post) {
     return Container(
       height: 360,
       padding: EdgeInsets.only(
@@ -198,8 +199,8 @@ class PostListState extends State<PostList> {
               child: ConstrainedBox(
                 constraints: BoxConstraints.expand(),
                 child: Hero(
-                  tag: widget.catalog + post['title'],
-                  child: Image.network(post['thumb'], fit: BoxFit.cover),
+                  tag: widget.catalog + post.title,
+                  child: Image.network(post.thumb, fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -211,7 +212,7 @@ class PostListState extends State<PostList> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      post['title'],
+                      post.title,
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -220,7 +221,7 @@ class PostListState extends State<PostList> {
                     Container(
                       padding: EdgeInsets.only(top: 20),
                       child: Text(
-                        post['location'],
+                        post.location,
                         style: TextStyle(color: Colors.grey, fontSize: 14),
                       ),
                     ),

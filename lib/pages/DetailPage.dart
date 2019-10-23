@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blog/model/post_info_data.dart';
 import 'package:blog/widgets/PostHeader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +13,7 @@ import 'dart:html' as html;
 class PostRouteArguments {
   PostRouteArguments({this.post, this.catalog});
 
-  final Map post;
+  final PostInfo post;
   final String catalog;
 }
 
@@ -54,12 +55,13 @@ class _DetailPageState extends State<DetailPage> {
             Stack(
               children: <Widget>[
                 PostHeader(
-                  title: widget.postDetailArguments.post['title'],
-                  desc: widget.postDetailArguments.post['desc'],
+                  title: widget.postDetailArguments.post.title,
+                  desc: widget.postDetailArguments.post.desc,
                   cover: Hero(
-                    tag: widget.postDetailArguments.catalog + widget.postDetailArguments.post['path'],
+                    tag: widget.postDetailArguments.catalog +
+                        widget.postDetailArguments.post.path,
                     child: Image.network(
-                      widget.postDetailArguments.post['thumb'],
+                      widget.postDetailArguments.post.thumb,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -137,7 +139,7 @@ class _DetailPageState extends State<DetailPage> {
 
   loadPostsData() {
     http
-        .get("posts" + widget.postDetailArguments.post['path'])
+        .get("posts" + widget.postDetailArguments.post.path)
         .then((http.Response response) {
       Utf8Decoder decoder = Utf8Decoder();
       String respMap = decoder.convert(response.bodyBytes);

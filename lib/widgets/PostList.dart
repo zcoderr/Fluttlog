@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:blog/pages/DetailPage.dart';
 import 'package:flutter/material.dart';
@@ -60,16 +61,22 @@ class PostListState extends State<PostList> {
   }
 
   toDetailPage(Map post) {
-    setState(() {
-      Navigator.of(context).push(new MaterialPageRoute<Null>(
-        builder: (BuildContext context) {
-          return DetailPage(          
-            post: post,
-            catalog: widget.catalog,
-          );
-        },
-      ));
-    });
+    Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          settings: const RouteSettings(name: "/post"),
+          builder: (BuildContext context) => DetailPage(
+            postDetailArguments:
+                PostRouteArguments(post: post, catalog: widget.catalog),
+          ),
+        ));
+
+      // Navigator.pushNamed(context, "/post",
+      //     arguments: PostRouteArguments(
+      //       post: post,
+      //       catalog: widget.catalog,
+      //     ));
+      //String path = "/post/" + post['title'];
   }
 
   loadPostsData() {

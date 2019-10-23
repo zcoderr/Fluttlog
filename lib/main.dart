@@ -1,4 +1,5 @@
 import 'package:blog/pages/AboutPage.dart';
+import 'package:blog/pages/DetailPage.dart';
 import 'package:blog/widgets/PostList.dart';
 import 'package:blog/widgets/SiteHeader.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +7,32 @@ import 'package:flutter/material.dart';
 void main() => runApp(FlutterBlog());
 
 class FlutterBlog extends StatelessWidget {
+
+  Route<Null> _getRoute(RouteSettings settings) {
+    switch (settings.name) {
+      // case '/post':
+      //   return MaterialPageRoute(
+      //       settings: const RouteSettings(name: '/post'),
+      //       builder: (context) => DetailPage(
+      //             postDetailArguments: settings.arguments,
+      //           ));
+      case 'login':
+        return MaterialPageRoute(builder: (context) => DetailPage());
+      default:
+        return MaterialPageRoute(builder: (context) => DetailPage());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      title: 'Zachary\'s Blog',
-      home: Scaffold(body: Site()),
-    );
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        title: 'Zachary\'s Blog',
+        home: Scaffold(body: Site()),
+        initialRoute: "/",
+        onGenerateRoute: _getRoute);
   }
 }
 

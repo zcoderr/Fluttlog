@@ -9,11 +9,16 @@ import 'package:flutter_html/flutter_html.dart' as flutter_html;
 import 'package:html/dom.dart' as dom;
 import 'dart:html' as html;
 
-class DetailPage extends StatefulWidget {
+class PostRouteArguments {
+  PostRouteArguments({this.post, this.catalog});
+
   final Map post;
   final String catalog;
+}
 
-  const DetailPage({Key key, this.post, this.catalog}) : super(key: key);
+class DetailPage extends StatefulWidget {
+  final PostRouteArguments postDetailArguments;
+  const DetailPage({Key key, this.postDetailArguments}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -27,6 +32,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
+
     loadPostsData();
   }
 
@@ -48,12 +54,12 @@ class _DetailPageState extends State<DetailPage> {
             Stack(
               children: <Widget>[
                 PostHeader(
-                  title: widget.post['title'],
-                  desc: widget.post['desc'],
+                  title: widget.postDetailArguments.post['title'],
+                  desc: widget.postDetailArguments.post['desc'],
                   cover: Hero(
-                    tag: widget.catalog + widget.post['path'],
+                    tag: widget.postDetailArguments.catalog + widget.postDetailArguments.post['path'],
                     child: Image.network(
-                      widget.post['thumb'],
+                      widget.postDetailArguments.post['thumb'],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -130,7 +136,9 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   loadPostsData() {
-    http.get("posts" + widget.post['path']).then((http.Response response) {
+    http
+        .get("posts" + widget.postDetailArguments.post['path'])
+        .then((http.Response response) {
       Utf8Decoder decoder = Utf8Decoder();
       String respMap = decoder.convert(response.bodyBytes);
 

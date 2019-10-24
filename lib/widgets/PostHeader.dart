@@ -11,7 +11,7 @@ class PostHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 400),
+      height: 350,
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -30,7 +30,9 @@ class PostHeader extends StatelessWidget {
                 ),
               ),
             child: Center(
-              child: Column(
+              child: Container(
+                padding: EdgeInsets.only(left: 20,right: 20),
+                child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(title,
@@ -44,6 +46,7 @@ class PostHeader extends StatelessWidget {
                           fontSize: 24,
                           fontWeight: FontWeight.normal)),
                 ],
+              ),
               ),
             ),
           )

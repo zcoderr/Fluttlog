@@ -135,24 +135,49 @@ class PostListState extends State<PostList> {
                 children: <Widget>[
                   Container(
                     width: 360,
-                    padding: EdgeInsets.only(left: 25),
+                    padding: EdgeInsets.only(left: 25, right: 25),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Text(
-                          post.title,
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              post.title,
+                              style: TextStyle(
+                                  fontSize: 23,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text(
+                                post.desc,
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black54),
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          padding: EdgeInsets.only(top: 40),
-                          child: Text(
-                            post.location,
-                            style: TextStyle(color: Colors.grey, fontSize: 14),
-                          ),
+                        // 时间和位置
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(top: 0),
+                              child: Text(
+                                post.time,
+                                style: TextStyle(
+                                    color: Colors.black54, fontSize: 14),
+                              ),
+                            ),
+                            Text(
+                              post.location,
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 14),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -206,10 +231,10 @@ class PostListState extends State<PostList> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(left: 25),
+                padding: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(
                       post.title,
@@ -218,12 +243,22 @@ class PostListState extends State<PostList> {
                           color: Colors.black,
                           fontWeight: FontWeight.w400),
                     ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Text(
-                        post.location,
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(top: 0),
+                          child: Text(
+                            post.time,
+                            style:
+                                TextStyle(color: Colors.black54, fontSize: 14),
+                          ),
+                        ),
+                        Text(
+                          post.location,
+                          style: TextStyle(color: Colors.black54, fontSize: 14),
+                        ),
+                      ],
                     ),
                   ],
                 ),

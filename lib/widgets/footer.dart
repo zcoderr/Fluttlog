@@ -16,8 +16,8 @@ class Footer extends StatelessWidget{
               decoration: BoxDecoration(color: Colors.grey),
             ),
             Container(
-              padding: EdgeInsets.only(top: 30),
-              child: Text("MIT Licensed | Copyright © 2019-present Zachary",style: TextStyle(color: Colors.grey,fontSize: 15),),)
+              padding: EdgeInsets.only(top: 20),
+              child: Text("Zachary © 2019 | Power by Flutter",style: TextStyle(color: Colors.grey,fontSize: 15),),)
           ],
         ),
       ),

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 void main() => runApp(FlutterBlog());
 
 class FlutterBlog extends StatelessWidget {
-
   Route<Null> _getRoute(RouteSettings settings) {
     switch (settings.name) {
       // case '/post':
@@ -46,11 +45,11 @@ class Site extends StatefulWidget {
 class SiteState extends State<Site> {
   int tabIndex = 0;
   static final List<String> items = [
-    'Home',
-    'Post',
-    'Tech',
-    'Photo',
-    'About',
+    'HOME',
+    'POST',
+    'TECH',
+    'PHOTO',
+    'ABOUT',
   ];
   static SiteTab siteTab = SiteTab(
     tabTitles: items,
@@ -120,12 +119,14 @@ class SiteTab extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(left: 30, bottom: 20),
       child: Row(
-        children: _buildTabItems(context),
+        children: MediaQuery.of(context).size.width > 800
+            ? _buildMaxTabItems(context)
+            : _buildMinTabItems(context),
       ),
     );
   }
 
-  List<Widget> _buildTabItems(BuildContext context) {
+  List<Widget> _buildMaxTabItems(BuildContext context) {
     final List<Widget> result = <Widget>[];
 
     for (int index = 0; index < tabTitles.length; index++) {
@@ -136,7 +137,7 @@ class SiteTab extends StatelessWidget {
               : () {
                   onTap(index);
                 },
-          child: _buildSingleTabItem(
+          child: _buildMaxSingleTabItem(
               index, tabTitles[index], currentIndex == index),
         ),
       );
@@ -144,12 +145,47 @@ class SiteTab extends StatelessWidget {
     return result;
   }
 
-  Widget _buildSingleTabItem(int index, String text, bool active) {
+  Widget _buildMaxSingleTabItem(int index, String text, bool active) {
     return Container(
       padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 5.0, top: 5.0),
       child: Text(
         text,
-        style: TextStyle(color: active ? Colors.white : Colors.grey),
+        style: TextStyle(
+            color: active ? Colors.white : Colors.grey,
+            fontSize: 18,
+            fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  List<Widget> _buildMinTabItems(BuildContext context) {
+    final List<Widget> result = <Widget>[];
+
+    for (int index = 0; index < tabTitles.length; index++) {
+      result.add(
+        GestureDetector(
+          onTap: onTap == null
+              ? null
+              : () {
+                  onTap(index);
+                },
+          child: _buildMinSingleTabItem(
+              index, tabTitles[index], currentIndex == index),
+        ),
+      );
+    }
+    return result;
+  }
+
+  Widget _buildMinSingleTabItem(int index, String text, bool active) {
+    return Container(
+      padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 5.0, top: 5.0),
+      child: Text(
+        text,
+        style: TextStyle(
+            color: active ? Colors.white : Colors.red,
+            fontSize: 16,
+            fontWeight: FontWeight.w400),
       ),
     );
   }

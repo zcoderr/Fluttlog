@@ -1,7 +1,8 @@
-import 'package:blog/pages/AboutPage.dart';
-import 'package:blog/pages/DetailPage.dart';
-import 'package:blog/widgets/PostList.dart';
-import 'package:blog/widgets/SiteHeader.dart';
+import 'package:blog/pages/about_page.dart';
+import 'package:blog/pages/detail_page.dart';
+import 'package:blog/widgets/post_list.dart';
+import 'package:blog/widgets/post_module_card.dart';
+import 'package:blog/widgets/site_header.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(FlutterBlog());
@@ -81,7 +82,7 @@ class SiteState extends State<Site> {
         ),
         IndexedStack(
           children: <Widget>[
-            PostList(
+            PostModuleCard(
               catalog: "all",
             ),
             PostList(

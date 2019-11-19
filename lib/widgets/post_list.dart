@@ -1,11 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:blog/model/post_info_data.dart';
-import 'package:blog/pages/DetailPage.dart';
+import 'package:blog/pages/detail_page.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
+import '../data_util.dart' as dataUtils;
+
+/// 带封面图的 Post 列表
+/// 入参为分类
 class PostList extends StatefulWidget {
   final String catalog;
 
@@ -18,12 +18,20 @@ class PostList extends StatefulWidget {
 }
 
 class PostListState extends State<PostList> {
-  List<PostInfo> posts = [];
+  List<PostInfo> _posts = [];
 
   @override
   void initState() {
     super.initState();
-    loadPostsData();
+    initData();
+  }
+
+  void initData() {
+    dataUtils.fetchPostListInfo(widget.catalog).then((List<PostInfo> postList) {
+      setState(() {
+        _posts = postList;
+      });
+    });
   }
 
   @override
@@ -31,19 +39,19 @@ class PostListState extends State<PostList> {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: buidlListItems());
+        children: _buidList());
   }
 
-  List<Widget> buidlListItems() {
+  List<Widget> _buidList() {
     final List<Widget> result = <Widget>[];
 
-    for (int index = 0; index < posts.length; index++) {
-      result.add(getListItem(posts[index]));
+    for (int index = 0; index < _posts.length; index++) {
+      result.add(_buildListItem(_posts[index]));
     }
     return result;
   }
 
-  Widget getListItem(PostInfo post) {
+  Widget _buildListItem(PostInfo post) {
     return InkWell(
       onTap: () {
         toDetailPage(post);
@@ -74,37 +82,6 @@ class PostListState extends State<PostList> {
     //       catalog: widget.catalog,
     //     ));
     //String path = "/post/" + post['title'];
-  }
-
-  loadPostsData() {
-    http.get("posts/data.json").then((http.Response response) {
-      Utf8Decoder decoder = Utf8Decoder();
-      JsonDecoder jsonDecoder = JsonDecoder();
-      Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
-
-      List jsonList = respMap['data'];
-
-      List<PostInfo> postInfoList =
-          jsonList.map((e) => PostInfo.fromJson(e)).toList();
-      // 解析数据
-
-      if (postInfoList.length > 0) {
-        if (widget.catalog != "all") {
-          postInfoList.forEach((post) {
-            if (post.catalog == widget.catalog) {
-              posts.add(post);
-              print(post.title);
-            }
-          });
-        } else {
-          posts = postInfoList;
-        }
-
-        setState(() {});
-      }
-    }).catchError((Error error) {
-      print(error.toString());
-    });
   }
 
   Widget buildMaxPostCard(PostInfo post) {

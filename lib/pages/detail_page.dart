@@ -1,15 +1,13 @@
-import 'dart:convert';
-
 import 'package:blog/model/post_info_data.dart';
-import 'package:blog/widgets/PostHeader.dart';
+import 'package:blog/widgets/post_header.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
 import 'package:markdown/markdown.dart' as markdown;
 import 'package:flutter_html/flutter_html.dart' as flutter_html;
 import 'package:html/dom.dart' as dom;
 import 'dart:html' as html;
+import 'package:blog/data_util.dart' as data_util;
 
 class PostRouteArguments {
   PostRouteArguments({this.post, this.catalog});
@@ -62,8 +60,17 @@ class _DetailPageState extends State<DetailPage> {
     _controller = ScrollController();
     _controller.addListener(_scrollListener);
     super.initState();
+    initData();
+  }
 
-    loadPostsData();
+  void initData() {
+    data_util
+        .fetchPostContent(widget.postDetailArguments.post.path)
+        .then((String postContent) {
+      setState(() {
+        _postContent = postContent;
+      });
+    });
   }
 
   String _postContent;
@@ -216,27 +223,5 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
     );
-  }
-
-  loadPostsData() {
-    http
-        .get("posts" + widget.postDetailArguments.post.path)
-        .then((http.Response response) {
-      Utf8Decoder decoder = Utf8Decoder();
-      String respMap = decoder.convert(response.bodyBytes);
-
-      // 解析数据
-      String postsData = respMap;
-      if (postsData.isNotEmpty) {
-        setState(() {
-          _postContent = postsData;
-        });
-      }
-      //var div = html.querySelector('selectors');
-      //var body = html.Element.html(markdown.markdownToHtml(postsData));
-      //div.append(body);
-    }).catchError((Error error) {
-      print(error.toString());
-    });
   }
 }

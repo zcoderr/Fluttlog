@@ -1,9 +1,11 @@
-import 'package:blog/pages/about_page.dart';
-import 'package:blog/pages/detail_page.dart';
-import 'package:blog/widgets/post_list.dart';
-import 'package:blog/widgets/post_module_card.dart';
-import 'package:blog/widgets/site_header.dart';
 import 'package:flutter/material.dart';
+
+import 'pages/about_page.dart';
+import 'pages/detail_page.dart';
+import 'widgets/post_list.dart';
+import 'widgets/post_module_card.dart';
+import 'widgets/site_header.dart';
+import 'widgets/book_list.dart';
 
 void main() => runApp(FlutterBlog());
 
@@ -50,6 +52,7 @@ class SiteState extends State<Site> {
     'POST',
     'TECH',
     'PHOTO',
+    'BOOK',
     'ABOUT',
   ];
   static SiteTab siteTab = SiteTab(
@@ -58,6 +61,7 @@ class SiteState extends State<Site> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      shrinkWrap: true, 
       children: <Widget>[
         Stack(
           children: <Widget>[
@@ -94,6 +98,7 @@ class SiteState extends State<Site> {
             PostList(
               catalog: "photo",
             ),
+            BookListView(),
             AboutPage(),
           ],
           index: tabIndex,

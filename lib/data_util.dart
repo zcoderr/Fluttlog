@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'model/post_info_data.dart';
+import 'model/post_info.dart';
 import 'package:http/http.dart' as http;
 
 ///
@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 Future<List<PostInfo>> fetchPostListInfo(String catalog) async {
   List<PostInfo> _posts = [];
 
-  var url = "posts/data.json";
+  var url = "content/data/post_data.json";
   var response = await http.get(url);
 
   Utf8Decoder decoder = Utf8Decoder();
@@ -38,10 +38,21 @@ Future<List<PostInfo>> fetchPostListInfo(String catalog) async {
 }
 
 Future<String> fetchPostContent(String postPath) async {
-  var url = "posts" + postPath;
+  var url = "/content" + postPath;
   var response = await http.get(url);
 
   Utf8Decoder decoder = Utf8Decoder();
   String respContent = decoder.convert(response.bodyBytes);
   return respContent;
+}
+
+Future<Map> fetchBookList() async {
+  var url = "content/data/booklist_data.json";
+  var response = await http.get(url);
+
+  Utf8Decoder decoder = Utf8Decoder();
+  JsonDecoder jsonDecoder = JsonDecoder();
+  Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
+  print(respMap['data'][0]['title']);
+  return respMap;
 }

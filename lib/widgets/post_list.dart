@@ -1,4 +1,4 @@
-import 'package:blog/model/post_info_data.dart';
+import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
@@ -36,19 +36,13 @@ class PostListState extends State<PostList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: _buidList());
-  }
-
-  List<Widget> _buidList() {
-    final List<Widget> result = <Widget>[];
-
-    for (int index = 0; index < _posts.length; index++) {
-      result.add(_buildListItem(_posts[index]));
-    }
-    return result;
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return _buildListItem(_posts[index]);
+      },
+      itemCount: _posts.length,
+    );
   }
 
   Widget _buildListItem(PostInfo post) {

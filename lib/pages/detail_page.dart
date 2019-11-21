@@ -1,4 +1,4 @@
-import 'package:blog/model/post_info_data.dart';
+import 'package:blog/model/post_info.dart';
 import 'package:blog/widgets/post_header.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';

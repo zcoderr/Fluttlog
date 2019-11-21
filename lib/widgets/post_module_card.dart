@@ -1,4 +1,4 @@
-import 'package:blog/model/post_info_data.dart';
+import 'package:blog/model/post_info.dart';
 import 'package:flutter/material.dart';
 
 import '../data_util.dart' as data_util;
@@ -71,23 +71,28 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 2 / 3,
-      padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "  " + post.time + "," + post.location,
-            style: TextStyle(
-                fontSize: 13, color: Colors.grey, fontStyle: FontStyle.italic),
-          ),
-          Text(
-            "· " + post.title,
-            style: TextStyle(fontSize: 16, color: Colors.black87),
-          ),
-        ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 1000),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 2 / 3,
+        padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "  " + post.time + "," + post.location,
+              style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                  fontStyle: FontStyle.italic),
+            ),
+            Text(
+              "· " + post.title,
+              style: TextStyle(fontSize: 16, color: Colors.black87),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -5,7 +5,8 @@ class SiteHeader extends StatelessWidget {
   final String desc;
   final Decoration decoration;
 
-  SiteHeader({Key key, this.title, this.desc,this.decoration}) : super(key: key);
+  SiteHeader({Key key, this.title, this.desc, this.decoration})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +16,14 @@ class SiteHeader extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            child:  Image.network(
-                //'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
-                '',
-                fit: BoxFit.cover,
-              ),
+            child: Image.network(
+              // 'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
+              '',
+              fit: BoxFit.cover,
+            ),
           ),
           Container(
-            decoration:decoration,
+            decoration: decoration,
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

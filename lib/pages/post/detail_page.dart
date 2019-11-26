@@ -1,5 +1,5 @@
 import 'package:blog/model/post_info.dart';
-import 'package:blog/widgets/post_header.dart';
+import 'package:blog/pages/post/post_header.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,7 +7,7 @@ import 'package:markdown/markdown.dart' as markdown;
 import 'package:flutter_html/flutter_html.dart' as flutter_html;
 import 'package:html/dom.dart' as dom;
 import 'dart:html' as html;
-import 'package:blog/data_util.dart' as data_util;
+import 'package:blog/data/data_util.dart' as data_util;
 
 class PostRouteArguments {
   PostRouteArguments({this.post, this.catalog});

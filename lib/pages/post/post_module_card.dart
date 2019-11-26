@@ -1,7 +1,7 @@
 import 'package:blog/model/post_info.dart';
 import 'package:flutter/material.dart';
 
-import '../data_util.dart' as data_util;
+import 'package:blog/data/data_util.dart' as data_util;
 
 // 没有封面图的 post 模块
 class PostModuleCard extends StatefulWidget {
@@ -80,6 +80,13 @@ class PostItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Row(
+              children: _buidTagList(post.tags),
+            ),
+            Text(
+              post.title,
+              style: TextStyle(fontSize: 16, color: Colors.black87),
+            ),
             Text(
               "  " + post.time + "," + post.location,
               style: TextStyle(
@@ -87,11 +94,33 @@ class PostItem extends StatelessWidget {
                   color: Colors.grey,
                   fontStyle: FontStyle.italic),
             ),
-            Text(
-              "· " + post.title,
-              style: TextStyle(fontSize: 16, color: Colors.black87),
-            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buidTagList(List tags) {
+    final List<Widget> result = <Widget>[];
+
+    for (int index = 0; index < tags.length; index++) {
+      result.add(_buildTagItem(tags[index]));
+    }
+    return result;
+  }
+
+  Widget _buildTagItem(String tag) {
+    return Padding(
+      padding: EdgeInsets.only(left: 3, right: 3),
+      child: Container(
+        padding: EdgeInsets.only(left: 5, right: 5),
+        decoration: BoxDecoration(
+            color: Colors.grey.shade300,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10)),
+        child: Text(
+          tag,
+          style: TextStyle(fontSize: 12),
         ),
       ),
     );

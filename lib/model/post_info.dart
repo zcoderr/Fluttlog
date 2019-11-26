@@ -5,10 +5,11 @@ class PostInfo {
   String location;
   String time;
   String catalog;
+  List tags;
   String path;
 
   PostInfo(this.title, this.desc, this.thumb, this.location, this.time,
-      this.catalog, this.path);
+      this.catalog, this.tags, this.path);
 
   static PostInfo fromJson(Map<String, dynamic> jsonMap) {
     PostInfo data = PostInfo(
@@ -18,6 +19,7 @@ class PostInfo {
         jsonMap["location"],
         jsonMap["time"],
         jsonMap["catalog"],
+        jsonMap["tags"],
         jsonMap["path"]);
     return data;
   }

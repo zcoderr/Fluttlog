@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'pages/about_page.dart';
-import 'pages/detail_page.dart';
-import 'widgets/post_list.dart';
-import 'widgets/post_module_card.dart';
+import 'pages/post/detail_page.dart';
+import 'pages/post/post_list.dart';
+import 'pages/post/post_module_card.dart';
 import 'widgets/site_header.dart';
-import 'widgets/book_list.dart';
+import 'pages/booklist/book_list.dart';
 
 void main() => runApp(FlutterBlog());
 
@@ -48,12 +48,12 @@ class Site extends StatefulWidget {
 class SiteState extends State<Site> {
   int tabIndex = 0;
   static final List<String> items = [
-    'HOME',
-    'POST',
-    'TECH',
-    'PHOTO',
-    'BOOK',
-    'ABOUT',
+    '首页',
+    '文章',
+    '影集',
+    '项目',
+    '书单', 
+    '关于',
   ];
   static SiteTab siteTab = SiteTab(
     tabTitles: items,
@@ -90,7 +90,7 @@ class SiteState extends State<Site> {
               catalog: "all",
             ),
             PostList(
-              catalog: "post",
+              catalog: "生活点滴",
             ),
             PostList(
               catalog: "tech",

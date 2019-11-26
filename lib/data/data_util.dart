@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'model/post_info.dart';
+import '../model/post_info.dart';
 import 'package:http/http.dart' as http;
 
 ///

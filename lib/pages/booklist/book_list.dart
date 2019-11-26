@@ -1,7 +1,7 @@
 // 没有封面图的 post 模块
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
-import '../data_util.dart' as data_util;
+import '../../data/data_util.dart' as data_util;
 
 class BookListView extends StatefulWidget {
   const BookListView({Key key}) : super(key: key);
@@ -36,7 +36,7 @@ class BookListViewState extends State<BookListView> {
   }
 
   Widget _buildBookCard(Map book) {
-    print(book);
+    print(book['thumb']);
     return InkWell(
       onTap: (){
         html.window.open(book['link'], "");
@@ -45,8 +45,6 @@ class BookListViewState extends State<BookListView> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            width: 100,
-            height: 200,
             child: Image.network(book['thumb']),
           ),
           Text(book['title'])

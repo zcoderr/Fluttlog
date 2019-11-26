@@ -6,7 +6,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/91/6/thumb.jpg",
             "location": "Beijing",
             "time": "2019-10-25",
-            "catalog": "other",
+            "catalog": "技术日志",
+            "tags":["Markdown","Blog"],
             "path": "/other/Markdown测试.md"
         },
         {
@@ -15,7 +16,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/15/4/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "post",
+            "catalog": "技术日志",
+            "tags":["Markdown","Blog"],
             "path": "/other/MarkdownForTypora.md"
         },
         {
@@ -24,7 +26,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/83/9/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "tech",
+            "catalog": "技术日志",
+            "tags":["linux","树莓派"],
             "path": "/tech/树莓派快速上手简明指北.md"
         },
         {
@@ -33,7 +36,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/12/6/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "post",
+            "catalog": "生活点滴",
+            "tags":["生活","记录"],
             "path": "/other/welcome.md"
         },
         {
@@ -42,7 +46,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/11/8/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "post",
+            "catalog": "生活点滴",
+            "tags":["生活","思考"],
             "path": "/other/UseImagesinTypora.md"
         },
         {
@@ -51,7 +56,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/74/9/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-8",
-            "catalog": "tech",
+            "catalog": "技术日志",
+            "tags":["Web"],
             "path": "/tech/1秒钟极速部署web程序.md"
         },
         {
@@ -60,7 +66,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/23/4/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "tech",
+            "catalog": "技术日志",
+            "tags":["blog","seo"],
             "path": "/tech/使用cdn加速博客访问速度和百度seo.md"
         },
         {
@@ -69,7 +76,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/34/5/thumb.jpg",
             "location": "Beijing",
             "time": "2018-10-9",
-            "catalog": "tech",
+            "catalog": "技术日志",
+            "tags":["spring boot","web"],
             "path": "/tech/使用springboot快速搭建简洁高效的web应用（一）.md"
         },
         {
@@ -78,7 +86,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/13/4/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "tech",
+            "catalog": "技术日志",
+            "tags":["gradle","kotlin"],
             "path": "/tech/用 Gradle 构建基于 Kotlin 的 Spring boot 项目.md"
         },
         {
@@ -87,7 +96,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/24/9/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "tech",
+            "catalog": "技术日志",
+            "tags":["spring boot","mybatis"],
             "path": "/tech/SpringBoot+Mybatis构建RestfulAPI.md"
         },
         {
@@ -96,7 +106,8 @@
             "thumb": "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/23/5/thumb.jpg",
             "location": "Beijing",
             "time": "2018-9-9",
-            "catalog": "photo",
+            "catalog": "游记",
+            "tags":["旅行","photo"],
             "path": "/photography/一些老照片.md"
         }
     ]

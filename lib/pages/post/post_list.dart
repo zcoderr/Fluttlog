@@ -1,8 +1,8 @@
 import 'package:blog/model/post_info.dart';
-import 'package:blog/pages/detail_page.dart';
+import 'package:blog/pages/post/detail_page.dart';
 import 'package:flutter/material.dart';
 
-import '../data_util.dart' as dataUtils;
+import 'package:blog/data/data_util.dart' as dataUtils;
 
 /// 带封面图的 Post 列表
 /// 入参为分类

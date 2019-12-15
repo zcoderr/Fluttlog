@@ -60,10 +60,10 @@ class PostListState extends State<PostList> {
   }
 
   toDetailPage(PostInfo post) {
-    Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          settings: const RouteSettings(name: "/post"),
+        Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              settings: const RouteSettings(name: "/post"),
           builder: (BuildContext context) => DetailPage(
             postDetailArguments:
                 PostRouteArguments(post: post, catalog: widget.catalog),
@@ -128,7 +128,13 @@ class PostListState extends State<PostList> {
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black54),
                               ),
-                            )
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Row(
+                                children: _buidTagList(post.tags),
+                              ),
+                            ),
                           ],
                         ),
                         // 时间和位置
@@ -194,10 +200,7 @@ class PostListState extends State<PostList> {
               height: 200,
               child: ConstrainedBox(
                 constraints: BoxConstraints.expand(),
-                child: Hero(
-                  tag: widget.catalog + post.title,
-                  child: Image.network(post.thumb, fit: BoxFit.cover),
-                ),
+                child: Image.network(post.thumb, fit: BoxFit.cover),
               ),
             ),
             Expanded(
@@ -214,6 +217,9 @@ class PostListState extends State<PostList> {
                           color: Colors.black,
                           fontWeight: FontWeight.w400),
                     ),
+                    // Row(
+                    //   children: _buidTagList(post.tags),
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -236,6 +242,32 @@ class PostListState extends State<PostList> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buidTagList(List tags) {
+    final List<Widget> result = <Widget>[];
+
+    for (int index = 0; index < tags.length; index++) {
+      result.add(_buildTagItem(tags[index]));
+    }
+    return result;
+  }
+
+  Widget _buildTagItem(String tag) {
+    return Padding(
+      padding: EdgeInsets.only(left: 3, right: 3),
+      child: Container(
+        padding: EdgeInsets.only(left: 5, right: 5),
+        decoration: BoxDecoration(
+            color: Colors.blue,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10)),
+        child: Text(
+          tag,
+          style: TextStyle(fontSize: 12, color: Colors.white),
         ),
       ),
     );

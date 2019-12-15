@@ -17,8 +17,7 @@ class SiteHeader extends StatelessWidget {
         children: <Widget>[
           Container(
             child: Image.network(
-              // 'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
-              '',
+               'https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/cover.jpeg',
               fit: BoxFit.cover,
             ),
           ),

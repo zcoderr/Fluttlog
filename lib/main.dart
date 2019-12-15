@@ -48,7 +48,6 @@ class Site extends StatefulWidget {
 class SiteState extends State<Site> {
   int tabIndex = 0;
   static final List<String> items = [
-    '首页',
     '文章',
     '影集',
     '项目',
@@ -86,11 +85,8 @@ class SiteState extends State<Site> {
         ),
         IndexedStack(
           children: <Widget>[
-            PostModuleCard(
-              catalog: "all",
-            ),
             PostList(
-              catalog: "生活点滴",
+              catalog: "all",
             ),
             PostList(
               catalog: "tech",
@@ -189,7 +185,7 @@ class SiteTab extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            color: active ? Colors.white : Colors.red,
+            color: active ? Colors.white : Colors.grey,
             fontSize: 16,
             fontWeight: FontWeight.w400),
       ),

@@ -49,3 +49,8 @@ Future _handleError(String path) async {
     exitCode = 2;
   }
 }
+
+
+void splitFrontMatter(){
+  
+}

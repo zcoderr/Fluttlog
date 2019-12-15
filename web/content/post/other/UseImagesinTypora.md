@@ -1,3 +1,13 @@
+---
+title: Use Images in Typora
+desc: 测试 Markdown 样式
+thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/93/6/thumb.jpg
+location: Beijing
+time: 2016-4-21
+catalog: 技术日志
+tags: ['Markdown','Blog']
+---
+
 # Use Images in Typora
 
 ## Images in Markdown

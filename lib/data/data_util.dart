@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 Future<List<PostInfo>> fetchPostListInfo(String catalog) async {
   List<PostInfo> _posts = [];
 
-  var url = "content/data/post_data.json";
+  var url = "data/data.json";
   var response = await http.get(url);
 
   Utf8Decoder decoder = Utf8Decoder();
@@ -27,7 +27,6 @@ Future<List<PostInfo>> fetchPostListInfo(String catalog) async {
       postInfoList.forEach((post) {
         if (post.catalog == catalog) {
           _posts.add(post);
-          print(post.title);
         }
       });
     } else {
@@ -38,16 +37,34 @@ Future<List<PostInfo>> fetchPostListInfo(String catalog) async {
 }
 
 Future<String> fetchPostContent(String postPath) async {
-  var url = "/content" + postPath;
+  var url = postPath;
   var response = await http.get(url);
 
   Utf8Decoder decoder = Utf8Decoder();
   String respContent = decoder.convert(response.bodyBytes);
-  return respContent;
+  
+  return splitFrontMatter(respContent);
 }
 
+String splitFrontMatter(String content) {
+    var lines = content.split('\n');
+    StringBuffer buffer = StringBuffer();
+    int splitNum = 0;
+    for (int i = 0; i < lines.length; i++) {
+      buffer.write(lines[i] + '\n');
+      if (lines[i] == "---") {
+        splitNum++;
+      }
+      if (splitNum == 2) {
+        break;
+      }
+    }
+    print(content.replaceFirst(buffer.toString(), ""));
+    return content.replaceFirst(buffer.toString(), "");
+  }
+
 Future<Map> fetchBookList() async {
-  var url = "content/data/booklist_data.json";
+  var url = "/data/booklist_data.json";
   var response = await http.get(url);
 
   Utf8Decoder decoder = Utf8Decoder();

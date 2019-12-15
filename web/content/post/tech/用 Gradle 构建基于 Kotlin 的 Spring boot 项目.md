@@ -1,3 +1,13 @@
+---
+title: 用Gradle构建基于Kotlin的Springboot应用
+desc: 测试 Markdown 样式
+thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/11/6/thumb.jpg
+location: Beijing
+time: 2019-7-25
+catalog: 技术日志
+tags: ['Markdown','Blog']
+---
+
 #### 一、配置本地Gradle
 
 1. 官网下载Gradle压缩包

@@ -1,3 +1,13 @@
+---
+title: 使用CDN
+desc: 测试 Markdown 样式
+thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/91/6/thumb.jpg
+location: Beijing
+time: 2019-10-24
+catalog: 技术日志
+tags:['Markdown','Blog']
+---
+
 　　多数情况下大家选择将hexo部署在github pages中，虽然具有完全免费而且一次部署无需维护的优势，但由于github服务器在境外，而且随着前段时间github屏蔽了百度爬虫的抓取，在国内的访问速度和百度搜索的呈现得不到保证，最方便的解决方案就是使用国内众多厂商都提供的CDN服务。
 <!--more-->
 　　国内可以选择的CDN服务许多，而且基本都有免费套餐，使用方式也都基本一致，本文简单介绍一下基于腾讯云的CDN如何加快博客访问速度和百度爬取。也同样适用于其他类型的网络程序。CDN在原理上相当于一个dns代理，这个代理中既包含了A类型的解析，又包含了Cache，之所能加快网站的访问速度，就是因为这个Cache层通常是分布在各地的节点组成的，网络请求会被CDN转发到距离用户最近的节点上。

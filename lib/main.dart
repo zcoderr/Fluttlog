@@ -4,6 +4,7 @@ import 'pages/about_page.dart';
 import 'pages/post/detail_page.dart';
 import 'pages/post/post_list.dart';
 import 'pages/post/post_module_card.dart';
+import 'widgets/site_bar.dart';
 import 'widgets/site_header.dart';
 import 'pages/booklist/book_list.dart';
 
@@ -51,7 +52,7 @@ class SiteState extends State<Site> {
     '文章',
     '影集',
     '项目',
-    '书单', 
+    '书单',
     '关于',
   ];
   static SiteTab siteTab = SiteTab(
@@ -59,46 +60,40 @@ class SiteState extends State<Site> {
   );
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true, 
+    return Stack(
       children: <Widget>[
-        Stack(
-          children: <Widget>[
-            SiteHeader(
-              title: 'Zachary\'s Blog',
-              desc: 'Just Empty！',
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: siteTab.copyWith(
-                tabTitles: items,
-                onTap: (index) {
-                  setState(() {
-                    tabIndex = index;
-                  });
-                },
-                currentIndex: tabIndex,
+        Padding(
+          padding: EdgeInsets.only(top: 60),
+          child: IndexedStack(
+            children: <Widget>[
+              PostList(
+                catalog: "all",
               ),
-            ),
-          ],
+              PostList(
+                catalog: "tech",
+              ),
+              PostList(
+                catalog: "photo",
+              ),
+              BookListView(),
+              AboutPage(),
+            ],
+            index: tabIndex,
+          ),
         ),
-        IndexedStack(
-          children: <Widget>[
-            PostList(
-              catalog: "all",
-            ),
-            PostList(
-              catalog: "tech",
-            ),
-            PostList(
-              catalog: "photo",
-            ),
-            BookListView(),
-            AboutPage(),
-          ],
-          index: tabIndex,
-        ),
+        SiteBar(
+          title: 'Zachary\'s Blog',
+          desc: 'Just Empty！',
+          tabs: siteTab.copyWith(
+            tabTitles: items,
+            onTap: (index) {
+              setState(() {
+                tabIndex = index;
+              });
+            },
+            currentIndex: tabIndex,
+          ),
+        )
       ],
     );
   }
@@ -119,7 +114,7 @@ class SiteTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 30, bottom: 20),
+      padding: EdgeInsets.only(left: 30),
       child: Row(
         children: MediaQuery.of(context).size.width > 800
             ? _buildMaxTabItems(context)
@@ -153,7 +148,7 @@ class SiteTab extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            color: active ? Colors.white : Colors.grey,
+            color: active ? Colors.black87 : Colors.grey,
             fontSize: 18,
             fontWeight: FontWeight.bold),
       ),
@@ -185,7 +180,7 @@ class SiteTab extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            color: active ? Colors.white : Colors.grey,
+            color: active ? Colors.black87 : Colors.grey,
             fontSize: 16,
             fontWeight: FontWeight.w400),
       ),

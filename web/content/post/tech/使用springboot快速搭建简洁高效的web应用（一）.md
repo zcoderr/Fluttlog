@@ -1,7 +1,7 @@
 ---
 title: SpringBoot 初探
 desc: 测试 Markdown 样式
-thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/91/6/thumb.jpg
+thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/95/2/thumb.jpg
 location: Beijing
 time: 2019-10-26
 catalog: 技术日志

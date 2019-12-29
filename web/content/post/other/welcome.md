@@ -1,7 +1,7 @@
 ---
 title: Welcome
 desc: 测试 Markdown 样式
-thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/91/1/thumb.jpg
+thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/89/5/thumb.jpg
 location: Beijing
 time: 2017-2-18
 catalog: 技术日志

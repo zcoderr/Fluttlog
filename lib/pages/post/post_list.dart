@@ -129,12 +129,12 @@ class PostListState extends State<PostList> {
                                     fontSize: 16, color: Colors.black54),
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Row(
-                                children: _buidTagList(post.tags),
-                              ),
-                            ),
+                            // Container(
+                            //   padding: EdgeInsets.only(top: 10),
+                            //   child: Row(
+                            //     children: _buidTagList(post.tags),
+                            //   ),
+                            // ),
                           ],
                         ),
                         // 时间和位置

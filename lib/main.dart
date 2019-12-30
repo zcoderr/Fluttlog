@@ -30,8 +30,10 @@ class FlutterBlog extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            primarySwatch: Colors.blue,
+            // highlightColor: Colors.transparent,
+            // splashColor: Colors.transparent
+            ),
         title: 'Zachary\'s Blog',
         home: Scaffold(body: Site()),
         initialRoute: "/",
@@ -144,15 +146,26 @@ class SiteTab extends StatelessWidget {
 
   Widget _buildMaxSingleTabItem(int index, String text, bool active) {
     return Container(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 5.0, top: 5.0),
-      child: Text(
-        text,
-        style: TextStyle(
-            color: active ? Colors.black87 : Colors.grey,
-            fontSize: 18,
-            fontWeight: FontWeight.bold),
-      ),
-    );
+        padding:
+            EdgeInsets.only(left: 25.0, bottom: 5.0, top: 5.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              text,
+              style: TextStyle(
+                  color: Color(0xff2c3e50),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400),
+            ),
+            Container(
+              height: 2.0,
+              width: active ? 30 : 0,
+              foregroundDecoration: BoxDecoration(color: Color(0xff69dad8)),
+            )
+          ],
+        ));
   }
 
   List<Widget> _buildMinTabItems(BuildContext context) {
@@ -176,15 +189,25 @@ class SiteTab extends StatelessWidget {
 
   Widget _buildMinSingleTabItem(int index, String text, bool active) {
     return Container(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 5.0, top: 5.0),
-      child: Text(
-        text,
-        style: TextStyle(
-            color: active ? Colors.black87 : Colors.grey,
-            fontSize: 16,
-            fontWeight: FontWeight.w400),
-      ),
-    );
+        padding: EdgeInsets.only(left: 10.0, bottom: 5.0, top: 5.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              text,
+              style: TextStyle(
+                  color: Color(0xff2c3e50),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
+            ),
+            Container(
+              height: 2.0,
+              width: active ? 25 : 0,
+              foregroundDecoration: BoxDecoration(color: Color(0xff69dad8)),
+            )
+          ],
+        ));
   }
 
   SiteTab copyWith({

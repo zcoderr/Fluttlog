@@ -36,12 +36,15 @@ class PostListState extends State<PostList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return _buildListItem(_posts[index]);
-      },
-      itemCount: _posts.length,
+    return ScrollConfiguration(
+      behavior: OverScrollBehavior(),
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return _buildListItem(_posts[index]);
+        },
+        itemCount: _posts.length,
+      ),
     );
   }
 
@@ -60,10 +63,10 @@ class PostListState extends State<PostList> {
   }
 
   toDetailPage(PostInfo post) {
-        Navigator.push(
-            context,
-            MaterialPageRoute<void>(
-              settings: const RouteSettings(name: "/post"),
+    Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          settings: const RouteSettings(name: "/post"),
           builder: (BuildContext context) => DetailPage(
             postDetailArguments:
                 PostRouteArguments(post: post, catalog: widget.catalog),
@@ -118,7 +121,7 @@ class PostListState extends State<PostList> {
                               post.title,
                               style: TextStyle(
                                   fontSize: 23,
-                                  color: Colors.black87,
+                                  color: Color(0xff2c3e50),
                                   fontWeight: FontWeight.w400),
                             ),
                             Container(
@@ -214,7 +217,7 @@ class PostListState extends State<PostList> {
                       post.title,
                       style: TextStyle(
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Color(0xff2c3e50),
                           fontWeight: FontWeight.w400),
                     ),
                     // Row(
@@ -271,5 +274,30 @@ class PostListState extends State<PostList> {
         ),
       ),
     );
+  }
+}
+
+class OverScrollBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.iOS:
+        return child;
+      case TargetPlatform.macOS:
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+        return GlowingOverscrollIndicator(
+          child: child,
+          //不显示头部水波纹
+          showLeading: false,
+          //不显示尾部水波纹
+          showTrailing: false,
+          axisDirection: axisDirection,
+          color: Theme.of(context).accentColor,
+        );
+        break;
+    }
+    return null;
   }
 }

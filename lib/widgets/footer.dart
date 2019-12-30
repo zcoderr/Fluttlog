@@ -17,7 +17,7 @@ class Footer extends StatelessWidget{
             ),
             Container(
               padding: EdgeInsets.only(top: 20),
-              child: Text("Zachary © 2019 | Powered by Flutter",style: TextStyle(color: Colors.grey,fontSize: 15),),)
+              child: Text("Zachary © 2019 - present | Powered by Flutter",style: TextStyle(color: Colors.grey,fontSize: 15),),)
           ],
         ),
       ),

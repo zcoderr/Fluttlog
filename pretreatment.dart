@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  listFile();
+  //treatementPost();
+  treatementGallery();
 }
 
-void listFile() async {
+void treatementPost() async {
   List<Map> mapList = [];
   Map dataMap = Map();
 
@@ -42,7 +43,53 @@ void listFile() async {
   }
 
   dataMap['data'] = mapList;
-  writeAsJson(dataMap);
+  writeAsJson(
+      dataMap, "/Users/zachary/code/flutter_web/blog/web/data/data.json");
+}
+
+void treatementGallery() async {
+  List<Map> mapList = [];
+  Map dataMap = Map();
+
+  var postDir =
+      await new Directory("web/content/gallery").create(recursive: true);
+
+  Stream<FileSystemEntity> entityList =
+      postDir.list(recursive: true, followLinks: false);
+
+  await for (FileSystemEntity entity in entityList) {
+    if (entity is File) {
+      //await readFrontMatter(entity.path).then((map) async {
+      await readFrontMatterAndImgList(entity.path).then((jsonString) {
+        //map['imgs'] = jsonString.toString();
+      });
+      //mapList.add(map);
+      //});
+    }
+  }
+
+  var n = mapList.length;
+  // 这里排序
+  for (int i = 0; i < n; ++i) {
+    bool flag = false;
+
+    for (int j = 0; j < n - i - 1; ++j) {
+      var time1 = mapList[j]['time'];
+      var time2 = mapList[j + 1]['time'];
+
+      if (aSmallerThanB(time1, time2)) {
+        Map temp = mapList[j];
+        mapList[j] = mapList[j + 1];
+        mapList[j + 1] = temp;
+        flag = true;
+      }
+    }
+    if (!flag) break;
+  }
+
+  dataMap['data'] = mapList;
+  writeAsJson(dataMap,
+      "/Users/zachary/code/flutter_web/blog/web/data/gallery_data.json");
 }
 
 bool aSmallerThanB(String s1, String s2) {
@@ -72,8 +119,8 @@ bool aSmallerThanB(String s1, String s2) {
   return date1 < date2;
 }
 
-void writeAsJson(Map map) {
-  final filePath = "/Users/zachary/code/flutter_web/blog/web/data/data.json";
+void writeAsJson(Map map, String path) {
+  final filePath = path;
   try {
     File file = new File(filePath);
     file.writeAsString(jsonEncode(map));
@@ -82,6 +129,7 @@ void writeAsJson(Map map) {
   }
 }
 
+// 读取并格式化 frontmatter
 Future<Map> readFrontMatter(String path) async {
   Map map = Map();
   bool isFrontMatter = false;
@@ -144,6 +192,77 @@ Future<Map> readFrontMatter(String path) async {
   }
   //print(map);
   return map;
+}
+
+// 读取并格式化 frontmatter 和图片列表，用于 gallery 类型
+Future<String> readFrontMatterAndImgList(String path) async {
+  String jsonString;
+  int markCount = 0;
+  int frontMatterMakrCount = 0;
+  var buffer = StringBuffer();
+  final lines =
+      utf8.decoder.bind(File(path).openRead()).transform(const LineSplitter());
+
+  buffer.write('[');
+  await for (var line in lines) {
+    //开始处理后面的图片数据
+    if (line == '---') {
+      frontMatterMakrCount++;
+    }
+    if (frontMatterMakrCount < 2) {
+    } else {
+      if (line == '|||') {
+        markCount++;
+        print("markCount:$markCount");
+      } else {
+        if (markCount == 1) {
+          buffer.write('{');
+        } else {
+          buffer.write('},{');
+        }
+
+        if (line.split(":").length > 1) {
+          String a = ":.*";
+          final regExp = new RegExp(a);
+          final result = regExp.allMatches(line);
+
+          // key
+          buffer.write("\"");
+          buffer.write(line.split(":")[0].trim());
+          buffer.write("\"");
+
+          buffer.write(":");
+
+          // value
+          buffer.write("\"");
+          buffer.write(result.first.group(0).replaceFirst(":", "").trim());
+          buffer.write("\"");
+        }
+      }
+    }
+  }
+  buffer.write(']');
+  jsonString = buffer.toString();
+  print(buffer);
+
+  //print(map);
+  return jsonString;
+}
+
+String splitFrontMatter(String content) {
+  var lines = content.split('\n');
+  StringBuffer buffer = StringBuffer();
+  int splitNum = 0;
+  for (int i = 0; i < lines.length; i++) {
+    buffer.write(lines[i] + '\n');
+    if (lines[i] == "---") {
+      splitNum++;
+    }
+    if (splitNum == 2) {
+      break;
+    }
+  }
+  return content.replaceFirst(buffer.toString(), "");
 }
 
 Future _handleError(String path) async {

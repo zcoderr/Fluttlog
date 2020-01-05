@@ -1,3 +1,5 @@
+import 'package:blog/pages/gallery/gallery_list.dart';
+import 'package:blog/pages/project/project_list.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/about_page.dart';
@@ -30,10 +32,10 @@ class FlutterBlog extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-            primarySwatch: Colors.blue,
-            // highlightColor: Colors.transparent,
-            // splashColor: Colors.transparent
-            ),
+          primarySwatch: Colors.blue,
+          // highlightColor: Colors.transparent,
+          // splashColor: Colors.transparent
+        ),
         title: 'Zachary\'s Blog',
         home: Scaffold(body: Site()),
         initialRoute: "/",
@@ -71,10 +73,10 @@ class SiteState extends State<Site> {
               PostList(
                 catalog: "all",
               ),
-              PostList(
-                catalog: "tech",
+              GalleryList(
+                catalog: "all",
               ),
-              PostList(
+              ProjectList(
                 catalog: "photo",
               ),
               BookListView(),
@@ -146,8 +148,7 @@ class SiteTab extends StatelessWidget {
 
   Widget _buildMaxSingleTabItem(int index, String text, bool active) {
     return Container(
-        padding:
-            EdgeInsets.only(left: 25.0, bottom: 5.0, top: 5.0),
+        padding: EdgeInsets.only(left: 25.0, bottom: 5.0, top: 5.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

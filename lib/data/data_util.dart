@@ -59,7 +59,6 @@ String splitFrontMatter(String content) {
         break;
       }
     }
-    print(content.replaceFirst(buffer.toString(), ""));
     return content.replaceFirst(buffer.toString(), "");
   }
 
@@ -72,4 +71,34 @@ Future<Map> fetchBookList() async {
   Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
   print(respMap['data'][0]['title']);
   return respMap;
+}
+
+Future<List<PostInfo>> fetchGalleryList(String catalog) async {
+  List<PostInfo> _posts = [];
+
+  var url = "data/gallery_data.json";
+  var response = await http.get(url);
+
+  Utf8Decoder decoder = Utf8Decoder();
+  JsonDecoder jsonDecoder = JsonDecoder();
+  Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
+
+  List jsonList = respMap['data'];
+
+  List<PostInfo> postInfoList =
+      jsonList.map((e) => PostInfo.fromJson(e)).toList();
+  // 解析数据
+
+  if (postInfoList.length > 0) {
+    if (catalog != "all") {
+      postInfoList.forEach((post) {
+        if (post.catalog == catalog) {
+          _posts.add(post);
+        }
+      });
+    } else {
+      _posts = postInfoList;
+    }
+  }
+  return _posts;
 }

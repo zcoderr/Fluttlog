@@ -7,18 +7,18 @@ import 'package:blog/data/data_util.dart' as dataUtils;
 
 /// 带封面图的 Post 列表
 /// 入参为分类
-class PostList extends StatefulWidget {
+class ProjectList extends StatefulWidget {
   final String catalog;
 
-  const PostList({Key key, this.catalog}) : super(key: key);
+  const ProjectList({Key key, this.catalog}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return PostListState();
+    return ProjectListState();
   }
 }
 
-class PostListState extends State<PostList> {
+class ProjectListState extends State<ProjectList> {
   List<PostInfo> _posts = [];
 
   @override

@@ -27,9 +27,7 @@ class GalleryListState extends State<GalleryList> {
   }
 
   void initData() {
-    dataUtils
-        .fetchGalleryList()
-        .then((List<PostInfoBean> galleryList) {
+    dataUtils.fetchGalleryList().then((List<PostInfoBean> galleryList) {
       setState(() {
         _galleryList = galleryList;
       });
@@ -72,8 +70,7 @@ class GalleryListState extends State<GalleryList> {
         MaterialPageRoute<void>(
           settings: const RouteSettings(name: "/post"),
           builder: (BuildContext context) => DetailPage(
-            postDetailArguments:
-                PostRouteArguments(post: post, catalog: ""),
+            postDetailArguments: PostRouteArguments(post: post, catalog: ""),
           ),
         ));
 
@@ -103,7 +100,7 @@ class GalleryListState extends State<GalleryList> {
             shape: new RoundedRectangleBorder(
               // 圆角
               borderRadius: BorderRadius.all(
-                Radius.circular(6.0),
+                Radius.circular(0.0),
               ),
             ),
             child: ConstrainedBox(
@@ -170,7 +167,7 @@ class GalleryListState extends State<GalleryList> {
                     child: Hero(
                       tag: "",
                       child: Image.network(galleryInfoBean.thumb,
-                          height: 300, fit: BoxFit.cover),
+                           fit: BoxFit.cover),
                     ),
                   ),
                 ],

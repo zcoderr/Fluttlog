@@ -1,4 +1,4 @@
-class PostInfo {
+class PostInfoBean {
   String title;
   String desc;
   String thumb;
@@ -8,11 +8,11 @@ class PostInfo {
   List tags;
   String path;
 
-  PostInfo(this.title, this.desc, this.thumb, this.location, this.time,
+  PostInfoBean(this.title, this.desc, this.thumb, this.location, this.time,
       this.catalog, this.tags, this.path);
 
-  static PostInfo fromJson(Map<String, dynamic> jsonMap) {
-    PostInfo data = PostInfo(
+  static PostInfoBean fromJson(Map<String, dynamic> jsonMap) {
+    PostInfoBean data = PostInfoBean(
         jsonMap["title"],
         jsonMap["desc"],
         jsonMap["thumb"],

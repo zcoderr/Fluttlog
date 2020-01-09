@@ -19,7 +19,7 @@ class ProjectList extends StatefulWidget {
 }
 
 class ProjectListState extends State<ProjectList> {
-  List<PostInfo> _posts = [];
+  List<PostInfoBean> _posts = [];
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class ProjectListState extends State<ProjectList> {
   }
 
   void initData() {
-    dataUtils.fetchPostListInfo(widget.catalog).then((List<PostInfo> postList) {
+    dataUtils.fetchPostListInfo(widget.catalog).then((List<PostInfoBean> postList) {
       setState(() {
         _posts = postList;
       });
@@ -51,7 +51,7 @@ class ProjectListState extends State<ProjectList> {
     );
   }
 
-  Widget _buildListItem(PostInfo post) {
+  Widget _buildListItem(PostInfoBean post) {
     return InkWell(
       onTap: () {
         toDetailPage(post);
@@ -65,7 +65,7 @@ class ProjectListState extends State<ProjectList> {
     );
   }
 
-  toDetailPage(PostInfo post) {
+  toDetailPage(PostInfoBean post) {
     Navigator.push(
         context,
         MaterialPageRoute<void>(
@@ -84,7 +84,7 @@ class ProjectListState extends State<ProjectList> {
     //String path = "/post/" + post['title'];
   }
 
-  Widget buildMaxPostCard(PostInfo post) {
+  Widget buildMaxPostCard(PostInfoBean post) {
     return Container(
       height: 300,
       padding: EdgeInsets.only(
@@ -181,7 +181,7 @@ class ProjectListState extends State<ProjectList> {
     );
   }
 
-  Widget buildMinPostCard(PostInfo post) {
+  Widget buildMinPostCard(PostInfoBean post) {
     return Container(
       height: 260,
       padding: EdgeInsets.only(

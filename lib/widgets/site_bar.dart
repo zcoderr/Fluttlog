@@ -14,7 +14,8 @@ class SiteBar extends StatelessWidget {
     return Container(
       height: 60,
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Color(0xFFF1F1F1), width: 2.0)),
+        border:
+            Border(bottom: BorderSide(color: Color(0xFFF1F1F1), width: 2.0)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -22,8 +23,12 @@ class SiteBar extends StatelessWidget {
           Container(
             child: Text(
               "Zachary's Blog",
-              style: MediaQuery.of(context).size.width > 800?TextStyle(fontSize: 23, color: Color(0xff2c3e50),fontWeight: FontWeight.w500):
-              TextStyle(fontSize: 16, color: Color(0xff2c3e50)),
+              style: MediaQuery.of(context).size.width > 800
+                  ? TextStyle(
+                      fontSize: 23,
+                      color: Color(0xff2c3e50),
+                      fontWeight: FontWeight.w500)
+                  : TextStyle(fontSize: 16, color: Color(0xff2c3e50)),
             ),
           ),
           tabs

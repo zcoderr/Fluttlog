@@ -1,3 +1,4 @@
+import 'package:blog/model/gallery_info.dart';
 import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/post/detail_page.dart';
 import 'package:blog/widgets/footer.dart';
@@ -8,9 +9,7 @@ import 'package:blog/data/data_util.dart' as dataUtils;
 /// 带封面图的 Post 列表
 /// 入参为分类
 class GalleryList extends StatefulWidget {
-  final String catalog;
-
-  const GalleryList({Key key, this.catalog}) : super(key: key);
+  const GalleryList({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -19,7 +18,7 @@ class GalleryList extends StatefulWidget {
 }
 
 class GalleryListState extends State<GalleryList> {
-  List<PostInfo> _posts = [];
+  List<PostInfoBean> _galleryList = [];
 
   @override
   void initState() {
@@ -28,9 +27,11 @@ class GalleryListState extends State<GalleryList> {
   }
 
   void initData() {
-    dataUtils.fetchGalleryList(widget.catalog).then((List<PostInfo> postList) {
+    dataUtils
+        .fetchGalleryList()
+        .then((List<PostInfoBean> galleryList) {
       setState(() {
-        _posts = postList;
+        _galleryList = galleryList;
       });
     });
   }
@@ -42,37 +43,37 @@ class GalleryListState extends State<GalleryList> {
       child: ListView.builder(
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return index == _posts.length
+          return index == _galleryList.length
               ? Footer()
-              : _buildListItem(_posts[index]);
+              : _buildListItem(_galleryList[index]);
         },
-        itemCount: _posts.length + 1,
+        itemCount: _galleryList.length + 1,
       ),
     );
   }
 
-  Widget _buildListItem(PostInfo post) {
+  Widget _buildListItem(PostInfoBean galleryInfoBean) {
     return InkWell(
       onTap: () {
-        toDetailPage(post);
+        //toDetailPage(post);
         // setState(() {
         //   currentPost = post;
         // });
       },
       child: MediaQuery.of(context).size.width > 800
-          ? buildMaxPostCard(post)
-          : buildMinPostCard(post),
+          ? buildMaxPostCard(galleryInfoBean)
+          : buildMaxPostCard(galleryInfoBean),
     );
   }
 
-  toDetailPage(PostInfo post) {
+  toDetailPage(PostInfoBean post) {
     Navigator.push(
         context,
         MaterialPageRoute<void>(
           settings: const RouteSettings(name: "/post"),
           builder: (BuildContext context) => DetailPage(
             postDetailArguments:
-                PostRouteArguments(post: post, catalog: widget.catalog),
+                PostRouteArguments(post: post, catalog: ""),
           ),
         ));
 
@@ -84,9 +85,9 @@ class GalleryListState extends State<GalleryList> {
     //String path = "/post/" + post['title'];
   }
 
-  Widget buildMaxPostCard(PostInfo post) {
+  Widget buildMaxPostCard(PostInfoBean galleryInfoBean) {
     return Container(
-      height: 300,
+      height: 500,
       padding: EdgeInsets.only(
           left: MediaQuery.of(context).size.width * 0.05,
           right: MediaQuery.of(context).size.width * 0.05,
@@ -121,7 +122,7 @@ class GalleryListState extends State<GalleryList> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              post.title,
+                              galleryInfoBean.title,
                               style: TextStyle(
                                   fontSize: 23,
                                   color: Color(0xff2c3e50),
@@ -130,7 +131,7 @@ class GalleryListState extends State<GalleryList> {
                             Container(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
-                                post.desc,
+                                galleryInfoBean.desc,
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black54),
                               ),
@@ -150,13 +151,13 @@ class GalleryListState extends State<GalleryList> {
                             Container(
                               padding: EdgeInsets.only(top: 0),
                               child: Text(
-                                post.time,
+                                galleryInfoBean.time,
                                 style: TextStyle(
                                     color: Colors.black54, fontSize: 14),
                               ),
                             ),
                             Text(
-                              post.location,
+                              galleryInfoBean.location,
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 14),
                             ),
@@ -167,8 +168,8 @@ class GalleryListState extends State<GalleryList> {
                   ),
                   Expanded(
                     child: Hero(
-                      tag: widget.catalog + post.path,
-                      child: Image.network(post.thumb,
+                      tag: "",
+                      child: Image.network(galleryInfoBean.thumb,
                           height: 300, fit: BoxFit.cover),
                     ),
                   ),
@@ -181,7 +182,7 @@ class GalleryListState extends State<GalleryList> {
     );
   }
 
-  Widget buildMinPostCard(PostInfo post) {
+  Widget buildMinPostCard(PostInfoBean post) {
     return Container(
       height: 260,
       padding: EdgeInsets.only(

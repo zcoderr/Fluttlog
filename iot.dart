@@ -107,7 +107,7 @@ void listFile() async {
 }
 
 void writeAsJson(Map map) {
-  final filePath = "/Users/zachary/code/flutter_web/blog/web/data/data.json";
+  final filePath = "/Users/zachary/code/flutter_web/blog/web/data/post_data.json";
   try {
     File file = new File(filePath);
     file.writeAsString(jsonEncode(map));

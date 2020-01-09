@@ -74,7 +74,6 @@ class SiteState extends State<Site> {
                 catalog: "all",
               ),
               GalleryList(
-                catalog: "all",
               ),
               ProjectList(
                 catalog: "photo",

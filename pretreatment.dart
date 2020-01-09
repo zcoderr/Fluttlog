@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  //treatementPost();
+  treatementPost();
   treatementGallery();
 }
 
@@ -44,7 +44,7 @@ void treatementPost() async {
 
   dataMap['data'] = mapList;
   writeAsJson(
-      dataMap, "/Users/zachary/code/flutter_web/blog/web/data/data.json");
+      dataMap, "/Users/zachary/code/flutter_web/blog/web/data/post_data.json");
 }
 
 void treatementGallery() async {
@@ -59,12 +59,9 @@ void treatementGallery() async {
 
   await for (FileSystemEntity entity in entityList) {
     if (entity is File) {
-      //await readFrontMatter(entity.path).then((map) async {
-      await readFrontMatterAndImgList(entity.path).then((jsonString) {
-        //map['imgs'] = jsonString.toString();
+      await readFrontMatter(entity.path).then((map) {
+        mapList.add(map);
       });
-      //mapList.add(map);
-      //});
     }
   }
 
@@ -206,10 +203,10 @@ Future<String> readFrontMatterAndImgList(String path) async {
   buffer.write('[');
   await for (var line in lines) {
     //开始处理后面的图片数据
-    if (line == '---') {
-      frontMatterMakrCount++;
-    }
     if (frontMatterMakrCount < 2) {
+      if (line == '---') {
+        frontMatterMakrCount++;
+      }
     } else {
       if (line == '|||') {
         markCount++;
@@ -217,6 +214,7 @@ Future<String> readFrontMatterAndImgList(String path) async {
       } else {
         if (markCount == 1) {
           buffer.write('{');
+          print("{=");
         } else {
           buffer.write('},{');
         }

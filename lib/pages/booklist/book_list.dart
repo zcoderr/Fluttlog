@@ -36,7 +36,6 @@ class BookListViewState extends State<BookListView> {
   }
 
   Widget _buildBookCard(Map book) {
-    print(book['thumb']);
     return InkWell(
       onTap: (){
         html.window.open(book['link'], "");

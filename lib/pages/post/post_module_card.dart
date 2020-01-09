@@ -16,12 +16,12 @@ class PostModuleCard extends StatefulWidget {
 }
 
 class PostModuleCardState extends State<PostModuleCard> {
-  List<PostInfo> _posts = [];
+  List<PostInfoBean> _posts = [];
 
   @override
   void initState() {
     super.initState();
-    data_util.fetchPostListInfo(widget.catalog).then((List<PostInfo> postList) {
+    data_util.fetchPostListInfo(widget.catalog).then((List<PostInfoBean> postList) {
       setState(() {
         _posts = postList;
       });
@@ -52,7 +52,7 @@ class PostModuleCardState extends State<PostModuleCard> {
     return result;
   }
 
-  Widget _buildListItem(PostInfo post) {
+  Widget _buildListItem(PostInfoBean post) {
     return InkWell(
       onTap: () {},
       child: MediaQuery.of(context).size.width > 800
@@ -65,7 +65,7 @@ class PostModuleCardState extends State<PostModuleCard> {
 }
 
 class PostItem extends StatelessWidget {
-  final PostInfo post;
+  final PostInfoBean post;
 
   const PostItem({Key key, this.post}) : super(key: key);
 

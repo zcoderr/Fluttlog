@@ -12,7 +12,7 @@ import 'package:blog/data/data_util.dart' as data_util;
 class PostRouteArguments {
   PostRouteArguments({this.post, this.catalog});
 
-  final PostInfo post;
+  final PostInfoBean post;
   final String catalog;
 }
 

@@ -84,97 +84,42 @@ class GalleryListState extends State<GalleryList> {
 
   Widget buildMaxPostCard(PostInfoBean galleryInfoBean) {
     return Container(
-      height: 500,
-      padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.05,
-          right: MediaQuery.of(context).size.width * 0.05,
-          top: 20,
-          bottom: 20),
-      child: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 1000),
-          child: Card(
-            // 卡片
-            clipBehavior: Clip.antiAlias,
-            elevation: 0.0,
-            shape: new RoundedRectangleBorder(
-              // 圆角
-              borderRadius: BorderRadius.all(
-                Radius.circular(0.0),
-              ),
-            ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints.expand(),
-              child: Row(
-                textDirection: TextDirection.rtl,
-                children: <Widget>[
-                  Container(
-                    width: 360,
-                    padding: EdgeInsets.only(left: 25, right: 25),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              galleryInfoBean.title,
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  color: Color(0xff2c3e50),
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Text(
-                                galleryInfoBean.desc,
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black54),
-                              ),
-                            ),
-                            // Container(
-                            //   padding: EdgeInsets.only(top: 10),
-                            //   child: Row(
-                            //     children: _buidTagList(post.tags),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                        // 时间和位置
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(top: 0),
-                              child: Text(
-                                galleryInfoBean.time,
-                                style: TextStyle(
-                                    color: Colors.black54, fontSize: 14),
-                              ),
-                            ),
-                            Text(
-                              galleryInfoBean.location,
-                              style: TextStyle(
-                                  color: Colors.black54, fontSize: 14),
-                            ),
-                          ],
-                        ),
-                      ],
+      child: Column(
+        //crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            constraints: BoxConstraints(maxWidth: 800),
+            child: Image.network(galleryInfoBean.thumb, fit: BoxFit.fitWidth),
+          ),
+          Container(
+            constraints: BoxConstraints(maxWidth: 800),
+            padding: EdgeInsets.only(left: 25, right: 25,top: 25,bottom: 25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      galleryInfoBean.title,
+                      style: TextStyle(
+                          fontSize: 23,
+                          color: Color(0xff2c3e50),
+                          fontWeight: FontWeight.w400),
                     ),
+                  ],
+                ),
+                // 时间和位置
+                Container(
+                  child: Text(
+                    galleryInfoBean.time + " - " + galleryInfoBean.location,
+                    style: TextStyle(color: Color(0xf02c3e50), fontSize: 14),
                   ),
-                  Expanded(
-                    child: Hero(
-                      tag: "",
-                      child: Image.network(galleryInfoBean.thumb,
-                           fit: BoxFit.cover),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }

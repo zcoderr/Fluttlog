@@ -84,27 +84,18 @@ class SiteState extends State<Site> {
             index: tabIndex,
           ),
         ),
-//        SiteBar(
-//          title: 'Zachary\'s Blog',
-//          desc: 'Just Empty！',
-//          tabs: siteTab.copyWith(
-//            tabTitles: items,
-//            onTap: (index) {
-//              setState(() {
-//                tabIndex = index;
-//              });
-//            },
-//            currentIndex: tabIndex,
-//          ),
-//        ),
-        siteTab.copyWith(
-          tabTitles: items,
-          onTap: (index) {
-            setState(() {
-              tabIndex = index;
-            });
-          },
-          currentIndex: tabIndex,
+        SiteBar(
+          title: 'Zachary\'s Blog',
+          desc: 'Just Empty！',
+          tabs: siteTab.copyWith(
+            tabTitles: items,
+            onTap: (index) {
+              setState(() {
+                tabIndex = index;
+              });
+            },
+            currentIndex: tabIndex,
+          ),
         ),
       ],
     );

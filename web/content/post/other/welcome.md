@@ -1,6 +1,6 @@
 ---
 title: Welcome
-desc: 测试 Markdown 样式
+desc: Thank you for choosing **Typora**. This document will help you to start Typora.Thank you for choosing **Typora**. This document will help you to start Typora.
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/89/5/thumb.jpg
 location: Beijing
 time: 2017-2-18

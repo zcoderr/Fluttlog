@@ -1,6 +1,7 @@
 ---
 title: Markdown For Typora
-desc: 测试 Markdown 样式
+desc: A paragraph is simply one or more consecutive lines of text. In markdown source code, paragraphs are separated by two or more blank lines. In Typora, you only need one blank line (press `Return` once) to create a new paragraph.
+Press `Shift` + `Return` to create a single line break. Most other markdown parsers will ignore single line breaks, so in order to make other markdown parsers recognize your line break, you can leave two spaces at the end of the line, or insert `<br/>`.
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/42/6/thumb.jpg
 location: Beijing
 time: 2018-9-25

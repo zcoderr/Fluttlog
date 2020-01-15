@@ -82,18 +82,18 @@ class GalleryListState extends State<GalleryList> {
     //String path = "/post/" + post['title'];
   }
 
-  Widget buildMaxPostCard(PostInfoBean galleryInfoBean) {
+  Widget buildMaxPostCard(PostInfoBean item) {
     return Container(
       child: Column(
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             constraints: BoxConstraints(maxWidth: 800),
-            child: Image.network(galleryInfoBean.thumb, fit: BoxFit.fitWidth),
+            child: Image.network(item.thumb, fit: BoxFit.fitWidth),
           ),
           Container(
             constraints: BoxConstraints(maxWidth: 800),
-            padding: EdgeInsets.only(left: 25, right: 25,top: 25,bottom: 25),
+            padding: EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 25),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -101,7 +101,7 @@ class GalleryListState extends State<GalleryList> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      galleryInfoBean.title,
+                      item.title,
                       style: TextStyle(
                           fontSize: 23,
                           color: Color(0xff2c3e50),
@@ -110,10 +110,47 @@ class GalleryListState extends State<GalleryList> {
                   ],
                 ),
                 // 时间和位置
-                Container(
-                  child: Text(
-                    galleryInfoBean.time + " - " + galleryInfoBean.location,
-                    style: TextStyle(color: Color(0xf02c3e50), fontSize: 14),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset(
+                        "images/icon_time.png",
+                        width: 15,
+                        height: 15,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 3),
+                        child: Text(
+                          item.time,
+                          style: TextStyle(
+                            color: Color(0xff999999),
+                            fontWeight: FontWeight.w100,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Image.asset(
+                          "images/icon_location.png",
+                          width: 15,
+                          height: 15,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 3),
+                        child: Text(
+                          item.location,
+                          style: TextStyle(
+                            color: Color(0xff999999),
+                            fontWeight: FontWeight.w100,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

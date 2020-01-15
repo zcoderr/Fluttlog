@@ -1,6 +1,6 @@
 ---
 title: 用Gradle构建基于Kotlin的Springboot应用
-desc: 测试 Markdown 样式
+desc: 1. 官网下载Gradle压缩包 2. 解压到/usr/local/bin目录 3. 添加gradle的环境变量
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/11/6/thumb.jpg
 location: Beijing
 time: 2019-7-25

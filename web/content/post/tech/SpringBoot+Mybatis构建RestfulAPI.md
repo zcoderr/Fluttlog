@@ -1,6 +1,6 @@
 ---
 title: SpringBoot+Mybatis构建RestfulAPI!
-desc: 测试 Markdown 样式
+desc: SpringBoot+Mybatis构建RestfulAPI
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/13/1/thumb.jpg
 location: Beijing
 time: 2019-4-25

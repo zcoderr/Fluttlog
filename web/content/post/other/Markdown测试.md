@@ -1,8 +1,8 @@
 ---
 title: Markdown 测试
-desc: 测试 Markdown 样式
+desc: 使用 * 和 ** 表示斜体和粗体。
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/88/6/thumb.jpg
-location: Be[Markdown,Blog]ijing
+location: Beijing
 time: 2019-10-22
 catalog: 技术日志
 tags:

@@ -3,11 +3,10 @@ import 'package:blog/pages/project/project_list.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/about_page.dart';
+import 'pages/essay/essay_list.dart';
 import 'pages/post/detail_page.dart';
 import 'pages/post/post_list.dart';
-import 'pages/post/post_module_card.dart';
 import 'widgets/site_bar.dart';
-import 'widgets/site_header.dart';
 import 'pages/booklist/book_list.dart';
 
 void main() => runApp(FlutterBlog());
@@ -53,15 +52,15 @@ class Site extends StatefulWidget {
 class SiteState extends State<Site> {
   int tabIndex = 0;
   static final List<String> items = [
-    '文章',
-    '影集',
-    '项目',
-    '书单',
-    '关于',
+    'POST',
+    'GALLERY',
+    'PROJECT',
+    //'ABOUT',
   ];
   static SiteTab siteTab = SiteTab(
     tabTitles: items,
   );
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -70,16 +69,13 @@ class SiteState extends State<Site> {
           padding: EdgeInsets.only(top: 60),
           child: IndexedStack(
             children: <Widget>[
-              PostList(
+              EssayList(
                 catalog: "all",
               ),
-              GalleryList(
-              ),
-              ProjectList(
-                catalog: "photo",
-              ),
-              BookListView(),
-              AboutPage(),
+              GalleryList(),
+              ProjectList(),
+              //BookListView(),
+              //AboutPage(),
             ],
             index: tabIndex,
           ),
@@ -160,6 +156,7 @@ class SiteTab extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             ),
             Container(
+              margin: EdgeInsets.only(top: 5),
               height: 2.0,
               width: active ? 30 : 0,
               foregroundDecoration: BoxDecoration(color: Color(0xff69dad8)),
@@ -198,14 +195,16 @@ class SiteTab extends StatelessWidget {
               text,
               style: TextStyle(
                   color: Color(0xff2c3e50),
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w400),
             ),
             Container(
-              height: 2.0,
-              width: active ? 25 : 0,
-              foregroundDecoration: BoxDecoration(color: Color(0xff69dad8)),
-            )
+              height: 2,
+              width: 30,
+              margin: EdgeInsets.only(top: 2),
+              foregroundDecoration: BoxDecoration(
+                  color: active ? Color(0xff69dad8) : Colors.transparent),
+            ),
           ],
         ));
   }

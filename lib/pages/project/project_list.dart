@@ -1,6 +1,7 @@
-import 'package:blog/model/post_info.dart';
-import 'package:blog/pages/post/detail_page.dart';
+import 'package:blog/model/project_info.dart';
+import 'dart:html' as html;
 import 'package:blog/widgets/footer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blog/data/data_util.dart' as dataUtils;
@@ -8,9 +9,7 @@ import 'package:blog/data/data_util.dart' as dataUtils;
 /// 带封面图的 Post 列表
 /// 入参为分类
 class ProjectList extends StatefulWidget {
-  final String catalog;
-
-  const ProjectList({Key key, this.catalog}) : super(key: key);
+  const ProjectList({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -19,7 +18,7 @@ class ProjectList extends StatefulWidget {
 }
 
 class ProjectListState extends State<ProjectList> {
-  List<PostInfoBean> _posts = [];
+  List<ProjectInfoBean> _projects = [];
 
   @override
   void initState() {
@@ -28,9 +27,9 @@ class ProjectListState extends State<ProjectList> {
   }
 
   void initData() {
-    dataUtils.fetchPostListInfo(widget.catalog).then((List<PostInfoBean> postList) {
+    dataUtils.fetchProjectListInfo().then((List<ProjectInfoBean> list) {
       setState(() {
-        _posts = postList;
+        _projects = list;
       });
     });
   }
@@ -42,56 +41,33 @@ class ProjectListState extends State<ProjectList> {
       child: ListView.builder(
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return index == _posts.length
+          return index == _projects.length
               ? Footer()
-              : _buildListItem(_posts[index]);
+              : _buildListItem(_projects[index]);
         },
-        itemCount: _posts.length + 1,
+        itemCount: _projects.length + 1,
       ),
     );
   }
 
-  Widget _buildListItem(PostInfoBean post) {
+  Widget _buildListItem(ProjectInfoBean item) {
     return InkWell(
       onTap: () {
-        toDetailPage(post);
-        // setState(() {
-        //   currentPost = post;
-        // });
+        toDetailPage(item);
       },
       child: MediaQuery.of(context).size.width > 800
-          ? buildMaxPostCard(post)
-          : buildMinPostCard(post),
+          ? buildMaxPostCard(item)
+          : buildMinPostCard(item),
     );
   }
 
-  toDetailPage(PostInfoBean post) {
-    Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          settings: const RouteSettings(name: "/post"),
-          builder: (BuildContext context) => DetailPage(
-            postDetailArguments:
-                PostRouteArguments(post: post, catalog: widget.catalog),
-          ),
-        ));
-
-    // Navigator.pushNamed(context, "/post",
-    //     arguments: PostRouteArguments(
-    //       post: post,
-    //       catalog: widget.catalog,
-    //     ));
-    //String path = "/post/" + post['title'];
+  toDetailPage(ProjectInfoBean item) {
+    html.window.open(item.url, "");
   }
 
-  Widget buildMaxPostCard(PostInfoBean post) {
+  Widget buildMaxPostCard(ProjectInfoBean item) {
     return Container(
-      height: 300,
-      padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.05,
-          right: MediaQuery.of(context).size.width * 0.05,
-          top: 20,
-          bottom: 20),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
       child: Center(
         child: Container(
           constraints: BoxConstraints(maxWidth: 1000),
@@ -105,71 +81,55 @@ class ProjectListState extends State<ProjectList> {
                 Radius.circular(6.0),
               ),
             ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints.expand(),
+            child: Container(
+              padding: EdgeInsets.all(20.0),
               child: Row(
-                textDirection: TextDirection.rtl,
                 children: <Widget>[
                   Container(
-                    width: 360,
-                    padding: EdgeInsets.only(left: 25, right: 25),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              post.title,
+                      width: 90,
+                      height: 90,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(item.logo),
+                              fit: BoxFit.cover))),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 25),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            item.title,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Color(0xff2c3e50),
+                                fontWeight: FontWeight.w400),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Text(
+                              item.desc,
                               style: TextStyle(
-                                  fontSize: 23,
-                                  color: Color(0xff2c3e50),
-                                  fontWeight: FontWeight.w400),
+                                  fontSize: 14, color: Colors.black54),
                             ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Text(
-                                post.desc,
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black54),
-                              ),
-                            ),
-                            // Container(
-                            //   padding: EdgeInsets.only(top: 10),
-                            //   child: Row(
-                            //     children: _buidTagList(post.tags),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                        // 时间和位置
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(top: 0),
-                              child: Text(
-                                post.time,
-                                style: TextStyle(
-                                    color: Colors.black54, fontSize: 14),
-                              ),
-                            ),
-                            Text(
-                              post.location,
-                              style: TextStyle(
-                                  color: Colors.black54, fontSize: 14),
-                            ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          // 时间和位置
+                        ],
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: Hero(
-                      tag: widget.catalog + post.path,
-                      child: Image.network(post.thumb,
-                          height: 300, fit: BoxFit.cover),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    padding:
+                        EdgeInsets.only(left: 20, right: 20, top: 7, bottom: 7),
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Color(0xff69dad8), width: 3.0),
+                        borderRadius: BorderRadius.circular(2)),
+                    child: Text(
+                      'View',
+                      style: TextStyle(color: Color(0xff69dad8)),
                     ),
                   ),
                 ],
@@ -181,73 +141,65 @@ class ProjectListState extends State<ProjectList> {
     );
   }
 
-  Widget buildMinPostCard(PostInfoBean post) {
+  Widget buildMinPostCard(ProjectInfoBean item) {
     return Container(
-      height: 260,
-      padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.04,
-          right: MediaQuery.of(context).size.width * 0.04,
-          top: 5,
-          bottom: 5),
-      child: Card(
-        // 卡片
-        clipBehavior: Clip.antiAlias,
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(
-          // 圆角
-          borderRadius: BorderRadius.all(
-            Radius.circular(4.0),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: 170,
-              child: ConstrainedBox(
-                constraints: BoxConstraints.expand(),
-                child: Image.network(post.thumb, fit: BoxFit.cover),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+      child: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 1000),
+          child: Card(
+            // 卡片
+            clipBehavior: Clip.antiAlias,
+            elevation: 0.0,
+            shape: new RoundedRectangleBorder(
+              // 圆角
+              borderRadius: BorderRadius.all(
+                Radius.circular(6.0),
               ),
             ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text(
-                      post.title,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xff2c3e50),
-                          fontWeight: FontWeight.w400),
-                    ),
-                    // Row(
-                    //   children: _buidTagList(post.tags),
-                    // ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Text(
-                            post.time,
-                            style:
-                                TextStyle(color: Colors.black54, fontSize: 14),
+            child: Container(
+              padding:
+                  EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(item.logo),
+                              fit: BoxFit.cover))),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 25),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            item.title,
+                            style: TextStyle(
+                                fontSize: 17,
+                                color: Color(0xff2c3e50),
+                                fontWeight: FontWeight.w400),
                           ),
-                        ),
-                        Text(
-                          post.location,
-                          style: TextStyle(color: Colors.black54, fontSize: 14),
-                        ),
-                      ],
+                          Container(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Text(
+                              item.desc,
+                              style: TextStyle(
+                                  fontSize: 13, color: Colors.black54),
+                            ),
+                          ),
+                          // 时间和位置
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

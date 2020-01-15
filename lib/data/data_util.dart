@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:blog/model/gallery_info.dart';
+import 'package:blog/model/project_info.dart';
 
 import '../model/post_info.dart';
 import 'package:http/http.dart' as http;
@@ -36,6 +36,21 @@ Future<List<PostInfoBean>> fetchPostListInfo(String catalog) async {
     }
   }
   return _posts;
+}
+
+Future<List<ProjectInfoBean>> fetchProjectListInfo() async {
+  var url = "data/project_data.json";
+  var response = await http.get(url);
+
+  Utf8Decoder decoder = Utf8Decoder();
+  JsonDecoder jsonDecoder = JsonDecoder();
+  Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
+
+  List jsonList = respMap['data'];
+
+  List<ProjectInfoBean> _projects =
+      jsonList.map((e) => ProjectInfoBean.fromJson(e)).toList();
+  return _projects;
 }
 
 Future<String> fetchPostContent(String postPath) async {

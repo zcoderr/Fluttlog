@@ -1,6 +1,6 @@
 ---
 title: Use Images in Typora
-desc: 测试 Markdown 样式
+desc: n markdown, image is written like `![alt](src)`. The `src` here can either be a url like `https://octodex.github.com/images/yaktocat.png`, or an absolute/relative file path, like `../images/test.png`.
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/51/6/thumb.jpg
 location: Beijing
 time: 2016-4-21

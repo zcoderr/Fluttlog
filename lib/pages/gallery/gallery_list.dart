@@ -59,8 +59,8 @@ class GalleryListState extends State<GalleryList> {
         // });
       },
       child: MediaQuery.of(context).size.width > 800
-          ? buildMaxPostCard(galleryInfoBean)
-          : buildMaxPostCard(galleryInfoBean),
+          ? buildMinPostCard(galleryInfoBean)
+          : buildMinPostCard(galleryInfoBean),
     );
   }
 
@@ -92,7 +92,7 @@ class GalleryListState extends State<GalleryList> {
             child: Image.network(item.thumb, fit: BoxFit.fitWidth),
           ),
           Container(
-            constraints: BoxConstraints(maxWidth: 800),
+            constraints: BoxConstraints(maxWidth: 600),
             padding: EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 25),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -161,73 +161,78 @@ class GalleryListState extends State<GalleryList> {
     );
   }
 
-  Widget buildMinPostCard(PostInfoBean post) {
-    return Container(
-      height: 260,
-      padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.04,
-          right: MediaQuery.of(context).size.width * 0.04,
-          top: 5,
-          bottom: 5),
-      child: Card(
-        // 卡片
-        clipBehavior: Clip.antiAlias,
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(
-          // 圆角
-          borderRadius: BorderRadius.all(
-            Radius.circular(4.0),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: 170,
-              child: ConstrainedBox(
-                constraints: BoxConstraints.expand(),
-                child: Image.network(post.thumb, fit: BoxFit.cover),
-              ),
+  Widget buildMinPostCard(PostInfoBean item) {
+    return Center(
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 800),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          elevation: 0.0,
+          shape: new RoundedRectangleBorder(
+            // 圆角
+            borderRadius: BorderRadius.all(
+              Radius.circular(0.0),
             ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          ),
+          margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+          child: Column(
+            children: <Widget>[
+              Image.network(item.thumb, fit: BoxFit.fitWidth),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Text(
+                  item.title,
+                  style: TextStyle(
+                      fontSize: 23,
+                      color: Color(0xff2c3e50),
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      post.title,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xff2c3e50),
-                          fontWeight: FontWeight.w400),
+                    Image.asset(
+                      "images/icon_time.png",
+                      width: 15,
+                      height: 15,
                     ),
-                    // Row(
-                    //   children: _buidTagList(post.tags),
-                    // ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Text(
-                            post.time,
-                            style:
-                                TextStyle(color: Colors.black54, fontSize: 14),
-                          ),
+                    Container(
+                      margin: EdgeInsets.only(left: 3),
+                      child: Text(
+                        item.time,
+                        style: TextStyle(
+                          color: Color(0xff999999),
+                          fontWeight: FontWeight.w100,
+                          fontSize: 12,
                         ),
-                        Text(
-                          post.location,
-                          style: TextStyle(color: Colors.black54, fontSize: 14),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Image.asset(
+                        "images/icon_location.png",
+                        width: 15,
+                        height: 15,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 3),
+                      child: Text(
+                        item.location,
+                        style: TextStyle(
+                          color: Color(0xff999999),
+                          fontWeight: FontWeight.w100,
+                          fontSize: 12,
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

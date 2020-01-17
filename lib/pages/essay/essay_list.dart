@@ -85,88 +85,86 @@ class EssayListState extends State<EssayList> {
   }
 
   Widget buildMaxPostCard(PostInfoBean post) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-      child: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 1000),
-          child: Card(
-            // 卡片
-            clipBehavior: Clip.antiAlias,
-            elevation: 0.0,
-            shape: new RoundedRectangleBorder(
-              // 圆角
-              borderRadius: BorderRadius.all(
-                Radius.circular(6.0),
-              ),
+    return Center(
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 1000),
+        child: Card(
+          // 卡片
+          margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+          clipBehavior: Clip.antiAlias,
+          elevation: 0,
+          shape: new RoundedRectangleBorder(
+            // 圆角
+            borderRadius: BorderRadius.all(
+              Radius.circular(6.0),
             ),
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    post.title,
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  post.title,
+                  style: TextStyle(
+                      fontSize: 23,
+                      color: Color(0xff2c3e50),
+                      fontWeight: FontWeight.w400),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    post.desc,
                     style: TextStyle(
-                        fontSize: 23,
-                        color: Color(0xff2c3e50),
-                        fontWeight: FontWeight.w400),
+                        fontSize: 16,
+                        color: Color(0xff555555),
+                        fontWeight: FontWeight.w300),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text(
-                      post.desc,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xff555555),
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                  // 时间和位置
-                  Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "images/icon_time.png",
+                ),
+                // 时间和位置
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Row(
+                    children: <Widget>[
+                      Image.asset(
+                        "images/icon_time.png",
+                        width: 15,
+                        height: 15,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 3),
+                        child: Text(
+                          post.time,
+                          style: TextStyle(
+                            color: Color(0xff999999),
+                            fontWeight: FontWeight.w100,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Image.asset(
+                          "images/icon_location.png",
                           width: 15,
                           height: 15,
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: 3),
-                          child: Text(
-                            post.time,
-                            style: TextStyle(
-                              color: Color(0xff999999),
-                              fontWeight: FontWeight.w100,
-                              fontSize: 12,
-                            ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 3),
+                        child: Text(
+                          post.location,
+                          style: TextStyle(
+                            color: Color(0xff999999),
+                            fontWeight: FontWeight.w100,
+                            fontSize: 12,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 20),
-                          child: Image.asset(
-                            "images/icon_location.png",
-                            width: 15,
-                            height: 15,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 3),
-                          child: Text(
-                            post.location,
-                            style: TextStyle(
-                              color: Color(0xff999999),
-                              fontWeight: FontWeight.w100,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -187,7 +185,7 @@ class EssayListState extends State<EssayList> {
             shape: new RoundedRectangleBorder(
               // 圆角
               borderRadius: BorderRadius.all(
-                Radius.circular(6.0),
+                Radius.circular(4.0),
               ),
             ),
             child: Container(

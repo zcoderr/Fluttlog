@@ -7,22 +7,14 @@ class Footer extends StatelessWidget {
     return Center(
       child: Container(
         constraints: BoxConstraints(maxWidth: 1000),
-        padding: EdgeInsets.only(top: 10, bottom: 30, left: 25, right: 25),
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: 1000,
-              height: 0.5,
-              decoration: BoxDecoration(color: Color(0xff2c3e50)),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 20),
-              child: Text(
-                "Zachary © 2019 - present | Powered by Flutter",
-                style: TextStyle(color: Color(0xff2c3e50), fontSize: 15),
-              ),
-            )
-          ],
+        padding: EdgeInsets.only(top: 0, bottom: 20, left: 25, right: 25),
+        child: Container(
+          padding: EdgeInsets.only(top: 20),
+          child: Text(
+            //"Zachary © 2019 - present | Powered by Flutter",
+            "Designed by Zachary © 2020 - Powered by Flutter",
+            style: TextStyle(color: Color(0xff999999), fontSize: 12,fontWeight: FontWeight.w100),
+          ),
         ),
       ),
     );

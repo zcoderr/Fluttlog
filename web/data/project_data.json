@@ -1,22 +1,25 @@
 {
   "data": [
     {
-      "title": "豆瓣电影 Flutter版 ",
-      "desc": "使用豆瓣 Api 实现了一个精美的 Flutter 版豆瓣电影客户端，细节很完善，更像一个经过完整设计的产品而非 Demo，期间踩了不少坑，文档包括从最开始环境安装到最后打包App的过程中涉及的知识点以及一些个人思考。",
-      "logo": "https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/unnamed.jpg",
-      "url": "https://github.com/zcoderr/Flutter_Douban"
+      "title": "MoBox-墨盒",
+      "desc": "这是一款专门为独立开发者和设计师打造的优质设计资源聚合工具。",
+      "logo": "https://storage-1251325576.cos.ap-beijing.myqcloud.com/default/clipboard_20200117034931.png",
+      "url": "https://github.com/zcoderr/Flutter_Douban",
+      "status": "Developing"
     },
     {
-      "title": "Sports Team Colors",
-      "desc": "A list of all the team colors for the clubs competing in the NFL, NBA, MLB and NHL. The color codes include Hex values, CMYK, RGB and Pantone.",
-      "logo": "https://d2zrsw3u8lkijg.cloudfront.net/resourcecards/images/sports-team-colors.png",
-      "url": "https://github.com/zcoderr/Flutter_Douban"
+      "title": "Fluttlog",
+      "desc": "基于 Flutter for Web 实现的静态博客系统。",
+      "logo": "https://storage-1251325576.cos.ap-beijing.myqcloud.com/default/fluttlog-logo.png",
+      "url": "https://github.com/zcoderr/Fluttlog",
+      "status": "Online"
     },
     {
-      "title": "Brand Colors",
-      "desc": "A collection of popular brands and their colors. For each color there is a Hex code, CMYK, RGB and equivalent Pantone value.A collection of popular brands and their colors. For each color there is a Hex code, CMYK, RGB and equivalent Pantone value.",
-      "logo": "https://d2zrsw3u8lkijg.cloudfront.net/resourcecards/images/brand-colors-1.1.png",
-      "url": "https://github.com/zcoderr/Flutter_Douban"
+      "title": "豆瓣电影 Flutter 版",
+      "desc": "用豆瓣 Api 实现的 Flutter 版豆瓣电影客户端，细节很完善，期间踩了不少坑，文档包括从最开始环境安装到最后打包App的过程中涉及的知识点以及一些个人思考。",
+      "logo": "https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/images.png",
+      "url": "https://github.com/zcoderr/Flutter_Douban",
+      "status": "Archive"
     }
   ]
 }

@@ -66,74 +66,96 @@ class ProjectListState extends State<ProjectList> {
   }
 
   Widget buildMaxPostCard(ProjectInfoBean item) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-      child: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 1000),
-          child: Card(
-            // 卡片
-            clipBehavior: Clip.antiAlias,
-            elevation: 0.0,
-            shape: new RoundedRectangleBorder(
-              // 圆角
-              borderRadius: BorderRadius.all(
-                Radius.circular(6.0),
-              ),
+    return Center(
+      child: Container(
+        margin: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+        constraints: BoxConstraints(maxWidth: 1000),
+        child: Card(
+          // 卡片
+          clipBehavior: Clip.antiAlias,
+          elevation: 0.0,
+          shape: new RoundedRectangleBorder(
+            // 圆角
+            borderRadius: BorderRadius.all(
+              Radius.circular(6.0),
             ),
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                      width: 90,
-                      height: 90,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(item.logo),
-                              fit: BoxFit.cover))),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            item.title,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Color(0xff2c3e50),
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Text(
-                              item.desc,
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+//                Container(
+//                  width: 90,
+//                  height: 90,
+//                  decoration: BoxDecoration(
+//                    shape: BoxShape.circle,
+//                    image: DecorationImage(
+//                      image: NetworkImage(item.logo),
+//                      fit: BoxFit.cover,
+//                    ),
+//                  ),
+//                ),
+                Image.network(
+                  item.logo,
+                  width: 90,
+                  height: 90,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              item.title,
                               style: TextStyle(
-                                  fontSize: 14, color: Colors.black54),
+                                  fontSize: 20,
+                                  color: Color(0xff2c3e50),
+                                  fontWeight: FontWeight.w400),
                             ),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              padding: EdgeInsets.only(
+                                  left: 5, right: 5, top: 3, bottom: 3),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff69dad8),
+                                  borderRadius: BorderRadius.circular(2)),
+                              child: Text(
+                                item.status,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 13),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text(
+                            item.desc,
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.black54),
                           ),
-                          // 时间和位置
-                        ],
-                      ),
+                        ),
+                        // 时间和位置
+                      ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 20),
-                    padding:
-                        EdgeInsets.only(left: 20, right: 20, top: 7, bottom: 7),
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Color(0xff69dad8), width: 3.0),
-                        borderRadius: BorderRadius.circular(2)),
-                    child: Text(
-                      'View',
-                      style: TextStyle(color: Color(0xff69dad8)),
-                    ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  padding:
+                      EdgeInsets.only(left: 20, right: 20, top: 7, bottom: 7),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Color(0xff69dad8), width: 3.0),
+                      borderRadius: BorderRadius.circular(2)),
+                  child: Text(
+                    'View',
+                    style: TextStyle(color: Color(0xff69dad8)),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -142,62 +164,83 @@ class ProjectListState extends State<ProjectList> {
   }
 
   Widget buildMinPostCard(ProjectInfoBean item) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-      child: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 1000),
-          child: Card(
-            // 卡片
-            clipBehavior: Clip.antiAlias,
-            elevation: 0.0,
-            shape: new RoundedRectangleBorder(
-              // 圆角
-              borderRadius: BorderRadius.all(
-                Radius.circular(6.0),
-              ),
+    return Center(
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 1000),
+        child: Card(
+          // 卡片
+          margin: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+          clipBehavior: Clip.antiAlias,
+          elevation: 0.0,
+          shape: new RoundedRectangleBorder(
+            // 圆角
+            borderRadius: BorderRadius.all(
+              Radius.circular(6.0),
             ),
-            child: Container(
-              padding:
-                  EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(item.logo),
-                              fit: BoxFit.cover))),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            item.title,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Color(0xff2c3e50),
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Text(
-                              item.desc,
+          ),
+          child: Container(
+            padding: EdgeInsets.only(left: 8, right: 8, top: 13, bottom: 13),
+            child: Row(
+              children: <Widget>[
+//                Container(
+//                    width: 60,
+//                    height: 60,
+//                    decoration: BoxDecoration(
+//                        shape: BoxShape.circle,
+//                        image: DecorationImage(
+//                            image: NetworkImage(item.logo),
+//                            fit: BoxFit.cover))),
+                Image.network(
+                  item.logo,
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.contain,
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              item.title,
                               style: TextStyle(
-                                  fontSize: 13, color: Colors.black54),
+                                  fontSize: 20,
+                                  color: Color(0xff2c3e50),
+                                  fontWeight: FontWeight.w400),
                             ),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              padding: EdgeInsets.only(
+                                  left: 5, right: 5, top: 3, bottom: 3),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff69dad8),
+                                  borderRadius: BorderRadius.circular(2)),
+                              child: Text(
+                                item.status,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text(
+                            item.desc,
+                            maxLines: 5,
+                            style:
+                                TextStyle(fontSize: 13, color: Colors.black54),
                           ),
-                          // 时间和位置
-                        ],
-                      ),
+                        ),
+                        // 时间和位置
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  treatementPost();
-  treatementGallery();
+  treatmentPost();
+  treatmentGallery();
 }
 
-void treatementPost() async {
+void treatmentPost() async {
   List<Map> mapList = [];
   Map dataMap = Map();
 
@@ -43,11 +43,17 @@ void treatementPost() async {
   }
 
   dataMap['data'] = mapList;
+
+  mapList.forEach((item){
+    print(item['title']);
+    print('-----------');
+  });
+
   writeAsJson(
       dataMap, "/Users/zachary/code/flutter_web/blog/web/data/post_data.json");
 }
 
-void treatementGallery() async {
+void treatmentGallery() async {
   List<Map> mapList = [];
   Map dataMap = Map();
 
@@ -85,6 +91,12 @@ void treatementGallery() async {
   }
 
   dataMap['data'] = mapList;
+
+  mapList.forEach((item){
+    print(item['title']);
+    print('-----------');
+  });
+
   writeAsJson(dataMap,
       "/Users/zachary/code/flutter_web/blog/web/data/gallery_data.json");
 }
@@ -112,7 +124,6 @@ bool aSmallerThanB(String s1, String s2) {
   var date1 = int.parse(aArray.join().replaceAll('-', ''));
   var date2 = int.parse(bArray.join().replaceAll('-', ''));
 
-  print(date1.toString() + '-----' + date2.toString());
   return date1 < date2;
 }
 

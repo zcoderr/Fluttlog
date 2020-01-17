@@ -3,8 +3,9 @@ class ProjectInfoBean {
   String desc;
   String logo;
   String url;
+  String status;
 
-  ProjectInfoBean(this.title, this.desc, this.logo, this.url);
+  ProjectInfoBean(this.title, this.desc, this.logo, this.url,this.status);
 
   static ProjectInfoBean fromJson(Map<String, dynamic> jsonMap) {
     ProjectInfoBean data = ProjectInfoBean(
@@ -12,6 +13,7 @@ class ProjectInfoBean {
       jsonMap["desc"],
       jsonMap["logo"],
       jsonMap["url"],
+      jsonMap["status"],
     );
     return data;
   }

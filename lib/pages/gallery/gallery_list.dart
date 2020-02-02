@@ -1,9 +1,10 @@
 import 'package:blog/model/gallery_info.dart';
 import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/post/detail_page.dart';
+import 'package:blog/utils/colors.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:html' as html;
 import 'package:blog/data/data_util.dart' as dataUtils;
 
 /// 带封面图的 Post 列表
@@ -18,7 +19,7 @@ class GalleryList extends StatefulWidget {
 }
 
 class GalleryListState extends State<GalleryList> {
-  List<PostInfoBean> _galleryList = [];
+  List<GalleryInfoBean> _galleryList = [];
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class GalleryListState extends State<GalleryList> {
   }
 
   void initData() {
-    dataUtils.fetchGalleryList().then((List<PostInfoBean> galleryList) {
+    dataUtils.fetchGalleryList().then((List<GalleryInfoBean> galleryList) {
       setState(() {
         _galleryList = galleryList;
       });
@@ -50,7 +51,7 @@ class GalleryListState extends State<GalleryList> {
     );
   }
 
-  Widget _buildListItem(PostInfoBean galleryInfoBean) {
+  Widget _buildListItem(GalleryInfoBean galleryInfoBean) {
     return InkWell(
       onTap: () {
         //toDetailPage(post);
@@ -58,9 +59,7 @@ class GalleryListState extends State<GalleryList> {
         //   currentPost = post;
         // });
       },
-      child: MediaQuery.of(context).size.width > 800
-          ? buildMinPostCard(galleryInfoBean)
-          : buildMinPostCard(galleryInfoBean),
+      child: buildMinPostCard(galleryInfoBean),
     );
   }
 
@@ -104,7 +103,7 @@ class GalleryListState extends State<GalleryList> {
                       item.title,
                       style: TextStyle(
                           fontSize: 23,
-                          color: Color(0xff2c3e50),
+                          color: ThemeColors.firstColor,
                           fontWeight: FontWeight.w400),
                     ),
                   ],
@@ -161,80 +160,135 @@ class GalleryListState extends State<GalleryList> {
     );
   }
 
-  Widget buildMinPostCard(PostInfoBean item) {
-    return Center(
-      child: Container(
-        constraints: BoxConstraints(maxWidth: 800),
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          elevation: 0.0,
-          shape: new RoundedRectangleBorder(
-            // 圆角
-            borderRadius: BorderRadius.all(
-              Radius.circular(0.0),
-            ),
-          ),
-          margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-          child: Column(
-            children: <Widget>[
-              Image.network(item.thumb, fit: BoxFit.fitWidth),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Text(
-                  item.title,
-                  style: TextStyle(
-                      fontSize: 23,
-                      color: Color(0xff2c3e50),
-                      fontWeight: FontWeight.w400),
-                ),
+  Widget buildMinPostCard(GalleryInfoBean item) {
+    return InkWell(
+      onTap: () {
+        item.play_url == null ? null : html.window.open(item.play_url, "");
+      },
+      child: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 800),
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            elevation: 0.0,
+            shape: new RoundedRectangleBorder(
+              // 圆角
+              borderRadius: BorderRadius.all(
+                Radius.circular(0.0),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 10, bottom: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      "images/icon_time.png",
-                      width: 15,
-                      height: 15,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 3),
-                      child: Text(
-                        item.time,
-                        style: TextStyle(
-                          color: Color(0xff999999),
-                          fontWeight: FontWeight.w100,
-                          fontSize: 12,
+            ),
+            margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+            child: Column(
+              children: <Widget>[
+                item.play_url == null
+                    ? Image.network(item.thumb, fit: BoxFit.fitWidth)
+                    : _videoCover(item),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      item.play_url == null
+                          ? Container()
+                          : Image.asset(
+                              "images/icon_video.png",
+                              width: 20,
+                              height: 20,
+                            ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          item.title,
+                          style: TextStyle(
+                              fontSize: 23,
+                              color: ThemeColors.firstColor,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Image.asset(
-                        "images/icon_location.png",
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset(
+                        "images/icon_time.png",
                         width: 15,
                         height: 15,
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 3),
-                      child: Text(
-                        item.location,
-                        style: TextStyle(
-                          color: Color(0xff999999),
-                          fontWeight: FontWeight.w100,
-                          fontSize: 12,
+                      Container(
+                        margin: EdgeInsets.only(left: 3),
+                        child: Text(
+                          item.time,
+                          style: TextStyle(
+                            color: Color(0xff999999),
+                            fontWeight: FontWeight.w100,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Image.asset(
+                          "images/icon_location.png",
+                          width: 15,
+                          height: 15,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 3),
+                        child: Text(
+                          item.location,
+                          style: TextStyle(
+                            color: Color(0xff999999),
+                            fontWeight: FontWeight.w100,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _videoCover(GalleryInfoBean item) {
+    return Stack(
+      overflow: Overflow.visible,
+      children: <Widget>[
+        Image.network(item.thumb, fit: BoxFit.fitWidth),
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: const FractionalOffset(0.0, 0.0),
+                end: const FractionalOffset(0.0, 1.0),
+                colors: <Color>[
+                  Colors.black.withOpacity(0.2),
+                  Colors.black.withOpacity(0.2),
+                  //const Color(0xff000000),
+                  //const Color(0xff000000)
+                ],
+              ),
+            ),
+            child: Align(
+              alignment: Alignment.center,
+              child: Image.asset(
+                "images/icon_play_video.png",
+                width: 45,
+                height: 45,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

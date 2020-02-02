@@ -1,3 +1,4 @@
+import 'package:blog/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class SiteBar extends StatelessWidget {
@@ -26,9 +27,9 @@ class SiteBar extends StatelessWidget {
               style: MediaQuery.of(context).size.width > 800
                   ? TextStyle(
                       fontSize: 23,
-                      color: Color(0xff2c3e50),
+                      color: ThemeColors.firstColor,
                       fontWeight: FontWeight.w500)
-                  : TextStyle(fontSize: 16, color: Color(0xff2c3e50)),
+                  : TextStyle(fontSize: 16, color: ThemeColors.firstColor),
             ),
           ),
           tabs

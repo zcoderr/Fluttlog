@@ -2,27 +2,27 @@ class GalleryInfoBean {
   String title;
   String desc;
   String thumb;
-  String originalImg;
   String location;
   String time;
   String catalog;
   List tags;
-  List images;
+  String path;
+  String play_url;
 
-  GalleryInfoBean(this.title, this.desc, this.thumb, this.originalImg,
-      this.location, this.time, this.catalog, this.tags, this.images);
+  GalleryInfoBean(this.title, this.desc, this.thumb, this.location, this.time,
+      this.catalog, this.tags, this.path, this.play_url);
 
   static GalleryInfoBean fromJson(Map<String, dynamic> jsonMap) {
     GalleryInfoBean data = GalleryInfoBean(
         jsonMap["title"],
         jsonMap["desc"],
         jsonMap["thumb"],
-        jsonMap["originalImg"],
         jsonMap["location"],
         jsonMap["time"],
         jsonMap["catalog"],
         jsonMap["tags"],
-        jsonMap["images"]);
+        jsonMap["path"],
+        jsonMap['play_url']);
     return data;
   }
 }

@@ -51,6 +51,13 @@ flutter:
     - images/icon_action_bar_back.png
     - images/icon_location.png
     - images/icon_time.png
+    - images/icon_github.png
+    - images/icon_gmail.png
+    - images/icon_weibo.png
+    - images/icon_zhihu.png
+    - images/icon_instagram.png
+    - images/icon_video.png
+    - images/icon_play_video.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

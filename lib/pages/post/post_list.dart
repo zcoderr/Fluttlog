@@ -1,5 +1,6 @@
 import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/post/detail_page.dart';
+import 'package:blog/utils/colors.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
 
@@ -124,7 +125,7 @@ class PostListState extends State<PostList> {
                               post.title,
                               style: TextStyle(
                                   fontSize: 23,
-                                  color: Color(0xff2c3e50),
+                                  color: ThemeColors.firstColor,
                                   fontWeight: FontWeight.w400),
                             ),
                             Container(
@@ -220,7 +221,7 @@ class PostListState extends State<PostList> {
                       post.title,
                       style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff2c3e50),
+                          color: ThemeColors.firstColor,
                           fontWeight: FontWeight.w400),
                     ),
                     // Row(

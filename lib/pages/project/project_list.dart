@@ -1,4 +1,5 @@
 import 'package:blog/model/project_info.dart';
+import 'package:blog/utils/colors.dart';
 import 'dart:html' as html;
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/cupertino.dart';
@@ -112,7 +113,7 @@ class ProjectListState extends State<ProjectList> {
                               item.title,
                               style: TextStyle(
                                   fontSize: 20,
-                                  color: Color(0xff2c3e50),
+                                  color: ThemeColors.firstColor,
                                   fontWeight: FontWeight.w400),
                             ),
                             Container(
@@ -120,7 +121,7 @@ class ProjectListState extends State<ProjectList> {
                               padding: EdgeInsets.only(
                                   left: 5, right: 5, top: 3, bottom: 3),
                               decoration: BoxDecoration(
-                                  color: Color(0xff69dad8),
+                                  color: ThemeColors.secondaryColor,
                                   borderRadius: BorderRadius.circular(2)),
                               child: Text(
                                 item.status,
@@ -148,11 +149,12 @@ class ProjectListState extends State<ProjectList> {
                   padding:
                       EdgeInsets.only(left: 20, right: 20, top: 7, bottom: 7),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xff69dad8), width: 3.0),
+                      border: Border.all(
+                          color: ThemeColors.secondaryColor, width: 3.0),
                       borderRadius: BorderRadius.circular(2)),
                   child: Text(
                     'View',
-                    style: TextStyle(color: Color(0xff69dad8)),
+                    style: TextStyle(color: ThemeColors.secondaryColor),
                   ),
                 ),
               ],
@@ -216,7 +218,7 @@ class ProjectListState extends State<ProjectList> {
                               padding: EdgeInsets.only(
                                   left: 5, right: 5, top: 3, bottom: 3),
                               decoration: BoxDecoration(
-                                  color: Color(0xff69dad8),
+                                  color: ThemeColors.secondaryColor,
                                   borderRadius: BorderRadius.circular(2)),
                               child: Text(
                                 item.status,

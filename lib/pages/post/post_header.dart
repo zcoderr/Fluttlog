@@ -5,7 +5,6 @@ class PostHeader extends StatelessWidget {
   final String desc;
   final Widget cover;
 
-
   PostHeader({Key key, this.title, this.desc, this.cover}) : super(key: key);
 
   @override

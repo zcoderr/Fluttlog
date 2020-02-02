@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:blog/model/gallery_info.dart';
 import 'package:blog/model/project_info.dart';
 
 import '../model/post_info.dart';
@@ -90,8 +91,8 @@ Future<Map> fetchBookList() async {
   return respMap;
 }
 
-Future<List<PostInfoBean>> fetchGalleryList() async {
-  List<PostInfoBean> _galleryList = [];
+Future<List<GalleryInfoBean>> fetchGalleryList() async {
+  List<GalleryInfoBean> _galleryList = [];
 
   var url = "data/gallery_data.json";
   var response = await http.get(url);
@@ -102,8 +103,8 @@ Future<List<PostInfoBean>> fetchGalleryList() async {
 
   List jsonList = respMap['data'];
 
-  List<PostInfoBean> galleryInfoList =
-      jsonList.map((e) => PostInfoBean.fromJson(e)).toList();
+  List<GalleryInfoBean> galleryInfoList =
+      jsonList.map((e) => GalleryInfoBean.fromJson(e)).toList();
   // 解析数据
   print(galleryInfoList[0].title);
   if (galleryInfoList.length > 0) {

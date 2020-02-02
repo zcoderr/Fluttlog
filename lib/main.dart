@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'pages/about_page.dart';
 import 'pages/essay/essay_list.dart';
 import 'pages/post/detail_page.dart';
-import 'pages/post/post_list.dart';
 import 'widgets/site_bar.dart';
-import 'pages/booklist/book_list.dart';
+import 'utils/colors.dart';
 
 void main() => runApp(FlutterBlog());
 
@@ -52,10 +51,10 @@ class Site extends StatefulWidget {
 class SiteState extends State<Site> {
   int tabIndex = 0;
   static final List<String> items = [
-    'POST',
-    'GALLERY',
-    'PROJECT',
-    //'ABOUT',
+    '文章',
+    '影像',
+    '项目',
+    '关于',
   ];
   static SiteTab siteTab = SiteTab(
     tabTitles: items,
@@ -75,7 +74,7 @@ class SiteState extends State<Site> {
               GalleryList(),
               ProjectList(),
               //BookListView(),
-              //AboutPage(),
+              AboutPage(),
             ],
             index: tabIndex,
           ),
@@ -151,7 +150,7 @@ class SiteTab extends StatelessWidget {
             Text(
               text,
               style: TextStyle(
-                  color: Color(0xff2c3e50),
+                  color: ThemeColors.firstColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w400),
             ),
@@ -159,7 +158,8 @@ class SiteTab extends StatelessWidget {
               margin: EdgeInsets.only(top: 5),
               height: 2.0,
               width: active ? 30 : 0,
-              foregroundDecoration: BoxDecoration(color: Color(0xff69dad8)),
+              foregroundDecoration:
+                  BoxDecoration(color: ThemeColors.secondaryColor),
             )
           ],
         ));
@@ -194,7 +194,7 @@ class SiteTab extends StatelessWidget {
             Text(
               text,
               style: TextStyle(
-                  color: Color(0xff2c3e50),
+                  color: ThemeColors.firstColor,
                   fontSize: 13,
                   fontWeight: FontWeight.w400),
             ),
@@ -203,7 +203,7 @@ class SiteTab extends StatelessWidget {
               width: 30,
               margin: EdgeInsets.only(top: 2),
               foregroundDecoration: BoxDecoration(
-                  color: active ? Color(0xff69dad8) : Colors.transparent),
+                  color: active ? ThemeColors.secondaryColor : Colors.transparent),
             ),
           ],
         ));

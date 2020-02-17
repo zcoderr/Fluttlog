@@ -1,7 +1,7 @@
 import 'package:blog/model/post_info.dart';
 import 'package:flutter/material.dart';
 
-import 'package:blog/data/data_util.dart' as data_util;
+import 'package:blog/datamodels/data_util.dart' as dataUtils;
 
 // 没有封面图的 post 模块
 class PostModuleCard extends StatefulWidget {
@@ -21,7 +21,9 @@ class PostModuleCardState extends State<PostModuleCard> {
   @override
   void initState() {
     super.initState();
-    data_util.fetchPostListInfo(widget.catalog).then((List<PostInfoBean> postList) {
+    dataUtils
+        .fetchPostListInfo(widget.catalog)
+        .then((List<PostInfoBean> postList) {
       setState(() {
         _posts = postList;
       });

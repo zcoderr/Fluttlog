@@ -9,17 +9,10 @@ import 'package:html/dom.dart' as dom;
 import 'dart:html' as html;
 import 'package:blog/datamodels/data_util.dart' as dataUtils;
 
-class PostRouteArguments {
-  PostRouteArguments({this.post, this.catalog});
+class PostDetailView extends StatefulWidget {
+  final String url;
 
-  final PostInfoBean post;
-  final String catalog;
-}
-
-class DetailPage extends StatefulWidget {
-  final PostRouteArguments postDetailArguments;
-
-  const DetailPage({Key key, this.postDetailArguments}) : super(key: key);
+  const PostDetailView({Key key, this.url}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -27,71 +20,44 @@ class DetailPage extends StatefulWidget {
   }
 }
 
-class _DetailPageState extends State<DetailPage> {
-  ScrollController _controller;
-
-  bool _active = false;
-
-  _handleActionBarState(bool active) {
-    setState(() {
-      _active = active;
-    });
-  }
-
-  _scrollListener() {
-    if (_controller.offset < 350) {
-      print("hide action bar");
-      if (_active) {
-        setState(() {
-          _active = false;
-        });
-      }
-    } else {
-      print("show action bar");
-      if (!_active) {
-        setState(() {
-          _active = true;
-        });
-      }
-    }
-  }
-
+class _DetailPageState extends State<PostDetailView> {
   @override
   void initState() {
-    _controller = ScrollController();
-    _controller.addListener(_scrollListener);
     super.initState();
     initData();
   }
 
   void initData() {
-    dataUtils
-        .fetchPostContent(widget.postDetailArguments.post.path)
-        .then((String postContent) {
+    print("获取到URl" + widget.url);
+    dataUtils.fetchPostInfoByUrl(widget.url).then((PostInfoBean postInfoBean) {
+      dataUtils.fetchPostContent(postInfoBean.path).then((String postContent) {
+        setState(() {
+          _postContent = postContent;
+        });
+      });
       setState(() {
-        _postContent = postContent;
+        _postInfoBean = postInfoBean;
       });
     });
   }
 
   String _postContent;
+  PostInfoBean _postInfoBean;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
+    return Stack(
       children: <Widget>[
         ListView(
-          controller: _controller,
           children: <Widget>[
             Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(
+                  Padding(
                     padding: EdgeInsets.only(top: 70),
                     child: Text(
-                      widget.postDetailArguments.post.title,
+                      _postInfoBean.title,
                       style: TextStyle(
                           color: ThemeColors.textColor333333,
                           fontSize: FontSize.fontSizeTitleMax),
@@ -110,7 +76,7 @@ class _DetailPageState extends State<DetailPage> {
                         Container(
                           margin: EdgeInsets.only(left: 3),
                           child: Text(
-                            widget.postDetailArguments.post.time,
+                            _postInfoBean.time,
                             style: TextStyle(
                               color: Color(0xff999999),
                               fontWeight: FontWeight.w100,
@@ -129,7 +95,7 @@ class _DetailPageState extends State<DetailPage> {
                         Container(
                           margin: EdgeInsets.only(left: 3),
                           child: Text(
-                            widget.postDetailArguments.post.location,
+                            _postInfoBean.location,
                             style: TextStyle(
                               color: Color(0xff999999),
                               fontWeight: FontWeight.w100,
@@ -149,16 +115,15 @@ class _DetailPageState extends State<DetailPage> {
             Footer()
           ],
         ),
-        _buildActinBar(),
       ],
-    ));
+    );
   }
 
   Widget _buildPostBody() {
     return Center(
       child: Container(
         constraints: BoxConstraints(maxWidth: 1000),
-        padding: EdgeInsets.only(left: 25, right: 25, bottom: 25,top: 20),
+        padding: EdgeInsets.only(bottom: 25, top: 20),
         child: flutter_html.Html(
           data: markdown.markdownToHtml(_postContent),
           onLinkTap: (url) {
@@ -202,82 +167,6 @@ class _DetailPageState extends State<DetailPage> {
             }
             return baseStyle;
           },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActinBar() {
-    return _active
-        ? appBar()
-        : InkWell(
-            child: Container(
-              padding: EdgeInsets.only(left: 20, top: 20),
-              child: Image.asset(
-                "images/icon_back.png",
-                width: 50,
-                height: 50,
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          );
-  }
-
-  Widget appBar() {
-    return SizedBox(
-      width: double.infinity,
-      height: 55,
-      child: AppBar(
-        leading: Builder(
-             builder: (BuildContext context) {
-               return IconButton(
-                 icon: Image.asset(
-                   "images/icon_back.png",
-                   width: 50,
-                   height: 50,
-                 ),
-                 onPressed: () { Navigator.pop(context); },
-               );
-             },
-           ),
-        title: Text(widget.postDetailArguments.post.title,style: TextStyle(color: ThemeColors.firstColor),),
-        backgroundColor: Colors.white,
-        actions: <Widget>[],
-      ),
-    );
-  }
-
-  Widget actionBar() {
-    return SizedBox(
-      width: double.infinity,
-      height: 70,
-      child: Container(
-        decoration: BoxDecoration(color: Colors.grey),
-        child: Row(
-          children: <Widget>[
-            InkWell(
-              child: Container(
-                padding: EdgeInsets.only(left: 25),
-                child: Image.asset(
-                  "images/icon_action_bar_back.png",
-                  width: 50,
-                  height: 50,
-                ),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 25),
-              child: Text(
-                widget.postDetailArguments.post.title,
-                style: TextStyle(color: Colors.white, fontSize: 23),
-              ),
-            )
-          ],
         ),
       ),
     );

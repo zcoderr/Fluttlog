@@ -44,7 +44,7 @@ void treatmentPost() async {
 
   dataMap['data'] = mapList;
 
-  mapList.forEach((item){
+  mapList.forEach((item) {
     print(item['title']);
     print('-----------');
   });
@@ -92,7 +92,7 @@ void treatmentGallery() async {
 
   dataMap['data'] = mapList;
 
-  mapList.forEach((item){
+  mapList.forEach((item) {
     print(item['title']);
     print('-----------');
   });
@@ -157,6 +157,12 @@ Future<Map> readFrontMatter(String path) async {
               final result = regExp.allMatches(line);
               map[line.split(":")[0].trim()] =
                   result.first.group(0).replaceFirst(":", "").trim();
+
+              //如果是 title ，根据title生成url
+              if (line.split(":")[0].trim() == "title") {
+                map['url'] = trimAllSpace(
+                    result.first.group(0).replaceFirst(":", "").trim());
+              }
             } else {
               // 是 tag 数组
               //map['tags'] = line.split(":")[1].trim();
@@ -200,6 +206,15 @@ Future<Map> readFrontMatter(String path) async {
   }
   //print(map);
   return map;
+}
+
+String trimAllSpace(String str) {
+  var str1 = str.split("");
+  var result = "";
+  for (String s in str1) {
+    result += s.trim();
+  }
+  return result;
 }
 
 // 读取并格式化 frontmatter 和图片列表，用于 gallery 类型

@@ -5,7 +5,7 @@ import 'package:blog/utils/colors.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
-import 'package:blog/data/data_util.dart' as dataUtils;
+import 'package:blog/datamodels/data_util.dart' as dataUtils;
 
 /// 带封面图的 Post 列表
 /// 入参为分类

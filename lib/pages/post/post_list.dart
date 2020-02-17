@@ -4,7 +4,7 @@ import 'package:blog/utils/colors.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
 
-import 'package:blog/data/data_util.dart' as dataUtils;
+import 'package:blog/datamodels/data_util.dart' as dataUtils;
 
 /// 带封面图的 Post 列表
 /// 入参为分类
@@ -47,7 +47,7 @@ class PostListState extends State<PostList> {
               ? Footer()
               : _buildListItem(_posts[index]);
         },
-        itemCount: _posts.length + 1,
+        itemCount: _posts.length+1,
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:blog/widgets/footer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:blog/data/data_util.dart' as dataUtils;
+import 'package:blog/datamodels/data_util.dart' as dataUtils;
 
 /// 带封面图的 Post 列表
 /// 入参为分类

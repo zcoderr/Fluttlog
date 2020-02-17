@@ -39,11 +39,6 @@ class PostHeader extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 34,
                           fontWeight: FontWeight.bold)),
-                  Text(desc,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.normal)),
                 ],
               ),
               ),

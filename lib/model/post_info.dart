@@ -6,10 +6,11 @@ class PostInfoBean {
   String time;
   String catalog;
   List tags;
+  String url;
   String path;
 
   PostInfoBean(this.title, this.desc, this.thumb, this.location, this.time,
-      this.catalog, this.tags, this.path);
+      this.catalog, this.tags, this.url,this.path);
 
   static PostInfoBean fromJson(Map<String, dynamic> jsonMap) {
     PostInfoBean data = PostInfoBean(
@@ -20,6 +21,7 @@ class PostInfoBean {
         jsonMap["time"],
         jsonMap["catalog"],
         jsonMap["tags"],
+        jsonMap["url"],
         jsonMap["path"]);
     return data;
   }

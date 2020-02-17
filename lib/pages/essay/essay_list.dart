@@ -1,10 +1,12 @@
 import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/post/detail_page.dart';
 import 'package:blog/utils/colors.dart';
+import 'package:blog/viewmodels/post_list_view_model.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
 
-import 'package:blog/data/data_util.dart' as dataUtils;
+import 'package:blog/datamodels/data_util.dart' as dataUtils;
+import 'package:provider_architecture/provider_architecture.dart';
 
 class EssayList extends StatefulWidget {
   final String catalog;
@@ -38,27 +40,30 @@ class EssayListState extends State<EssayList> {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollConfiguration(
-      behavior: OverScrollBehavior(),
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return index == _posts.length
-              ? Footer()
-              : _buildListItem(_posts[index]);
-        },
-        itemCount: _posts.length + 1,
-      ),
-    );
+    return ViewModelProvider<PostListViewModel>.withConsumer(
+        viewModel: PostListViewModel(),
+        builder: (context, model, child) => ScrollConfiguration(
+              behavior: OverScrollBehavior(),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return index == _posts.length
+                      ? Footer()
+                      : _buildListItem(_posts[index], model);
+                },
+                itemCount: _posts.length + 1,
+              ),
+            ));
   }
 
-  Widget _buildListItem(PostInfoBean post) {
+  Widget _buildListItem(PostInfoBean post, PostListViewModel model) {
     return InkWell(
       onTap: () {
-        toDetailPage(post);
+        //toDetailPage(post);
         // setState(() {
         //   currentPost = post;
         // });
+        model.navigateToEpisode(post.url);
       },
       child: MediaQuery.of(context).size.width > 800
           ? buildMaxPostCard(post)
@@ -67,15 +72,15 @@ class EssayListState extends State<EssayList> {
   }
 
   toDetailPage(PostInfoBean post) {
-    Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          settings: const RouteSettings(name: "/post"),
-          builder: (BuildContext context) => DetailPage(
-            postDetailArguments:
-                PostRouteArguments(post: post, catalog: widget.catalog),
-          ),
-        ));
+//    Navigator.push(
+//        context,
+//        MaterialPageRoute<void>(
+//          //settings: const RouteSettings(name: "/post"),
+//          builder: (BuildContext context) => DetailPage(
+//            postDetailArguments:
+//                PostRouteArguments(post: post, catalog: widget.catalog),
+//          ),
+//        ));
 
     // Navigator.pushNamed(context, "/post",
     //     arguments: PostRouteArguments(
@@ -91,6 +96,7 @@ class EssayListState extends State<EssayList> {
         constraints: BoxConstraints(maxWidth: 1000),
         child: Card(
           // 卡片
+          color: Colors.grey.shade50,
           margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
           clipBehavior: Clip.antiAlias,
           elevation: 0,

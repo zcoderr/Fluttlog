@@ -1,43 +1,38 @@
+import 'package:blog/locator.dart';
 import 'package:blog/pages/gallery/gallery_list.dart';
+import 'package:blog/pages/layout_template/layout_template.dart';
 import 'package:blog/pages/project/project_list.dart';
+import 'package:blog/routing/route_names.dart';
+import 'package:blog/routing/router.dart';
+import 'package:blog/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/about_page.dart';
 import 'pages/essay/essay_list.dart';
-import 'pages/post/detail_page.dart';
-import 'widgets/site_bar.dart';
 import 'utils/colors.dart';
 
-void main() => runApp(FlutterBlog());
+void main() {
+  setupLocator();
+  runApp(FlutterBlog());
+}
 
 class FlutterBlog extends StatelessWidget {
-  Route<Null> _getRoute(RouteSettings settings) {
-    switch (settings.name) {
-      // case '/post':
-      //   return MaterialPageRoute(
-      //       settings: const RouteSettings(name: '/post'),
-      //       builder: (context) => DetailPage(
-      //             postDetailArguments: settings.arguments,
-      //           ));
-      case 'login':
-        return MaterialPageRoute(builder: (context) => DetailPage());
-      default:
-        return MaterialPageRoute(builder: (context) => DetailPage());
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          // highlightColor: Colors.transparent,
-          // splashColor: Colors.transparent
-        ),
-        title: 'Zachary\'s Blog',
-        home: Scaffold(body: Site()),
-        initialRoute: "/",
-        onGenerateRoute: _getRoute);
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        // highlightColor: Colors.transparent,
+        // splashColor: Colors.transparent
+      ),
+      title: 'Zachary\'s Blog',
+      builder: (context, child) => LayoutTemplate(
+        child: child,
+      ),
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      onGenerateRoute: generateRoute,
+      initialRoute: PostRoute,
+    );
   }
 }
 
@@ -79,19 +74,19 @@ class SiteState extends State<Site> {
             index: tabIndex,
           ),
         ),
-        SiteBar(
-          title: 'Zachary\'s Blog',
-          desc: 'Just Empty！',
-          tabs: siteTab.copyWith(
-            tabTitles: items,
-            onTap: (index) {
-              setState(() {
-                tabIndex = index;
-              });
-            },
-            currentIndex: tabIndex,
-          ),
-        ),
+//        SiteBar(
+//          title: 'Zachary\'s Blog',
+//          desc: 'Just Empty！',
+//          tabs: siteTab.copyWith(
+//            tabTitles: items,
+//            onTap: (index) {
+//              setState(() {
+//                tabIndex = index;
+//              });
+//            },
+//            currentIndex: tabIndex,
+//          ),
+//        ),
       ],
     );
   }
@@ -203,7 +198,8 @@ class SiteTab extends StatelessWidget {
               width: 30,
               margin: EdgeInsets.only(top: 2),
               foregroundDecoration: BoxDecoration(
-                  color: active ? ThemeColors.secondaryColor : Colors.transparent),
+                  color:
+                      active ? ThemeColors.secondaryColor : Colors.transparent),
             ),
           ],
         ));

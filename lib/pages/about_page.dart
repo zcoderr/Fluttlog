@@ -10,7 +10,7 @@ class AboutPage extends StatelessWidget {
     return ScrollConfiguration(
       behavior: OverScrollBehavior(),
       child: ListView(
-        children: <Widget>[_maxAboutBody(), Footer()],
+        children: <Widget>[_maxAboutBody()],
       ),
     );
   }
@@ -18,12 +18,12 @@ class AboutPage extends StatelessWidget {
   Widget _maxAboutBody() {
     return Center(
       child: Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+        padding: EdgeInsets.only(left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 20, left: 7),
               child: RichText(
                 text: TextSpan(children: <TextSpan>[
                   TextSpan(
@@ -70,25 +70,25 @@ class AboutPage extends StatelessWidget {
                 style: TextStyle(fontSize: FontSize.fontSizeSubTitleMax),
               ),
             ),
-            ProjectInfoSection(
-                "十点文化传播有限公司",
-                "高级 Android 开发工程师",
-                "2018.10 - present",
-                "知识付费 APP「十点读书」",
-                "开发核心业务和模块封装、解决大量工作流中的痛点、负责 Flutter 的推广和接入。"),
-            ProjectInfoSection("问问科技有限公司", "Android 开发工程师", "2018.1 - 2018.10",
-                "直播 App「小直播」", "独立负责 Android 端技术选型、框架搭建、及所有的业务开发和后续迭代。"),
-            ProjectInfoSection("糖块信息技术有限公司", "Android 开发工程师",
-                "2016.10 - 2018.1", "LBS 社交 App「Any」", "主要业务开发和迭代。"),
-            Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: Text(
-                'What Skii I Have',
-                style: TextStyle(fontSize: FontSize.fontSizeSubTitleMax),
-              ),
-            ),
+//            ProjectInfoSection(
+//                "十点文化传播有限公司",
+//                "高级 Android 开发工程师",
+//                "2018.10 - present",
+//                "知识付费 APP「十点读书」",
+//                "开发核心业务和模块封装、解决大量工作流中的痛点、负责 Flutter 的推广和接入。"),
+//            ProjectInfoSection("问问科技有限公司", "Android 开发工程师", "2018.1 - 2018.10",
+//                "直播 App「小直播」", "独立负责 Android 端技术选型、框架搭建、及所有的业务开发和后续迭代。"),
+//            ProjectInfoSection("糖块信息技术有限公司", "Android 开发工程师",
+//                "2016.10 - 2018.1", "LBS 社交 App「Any」", "主要业务开发和迭代。"),
+//            Padding(
+//              padding: EdgeInsets.only(bottom: 10),
+//              child: Text(
+//                'What Skii I Have',
+//                style: TextStyle(fontSize: FontSize.fontSizeSubTitleMax),
+//              ),
+//            ),
             Wrap(
-              children: _buidTagList([
+              children: _buildTagList([
                 'Java',
                 'Dart',
                 'Python',
@@ -113,13 +113,14 @@ class AboutPage extends StatelessWidget {
               padding: EdgeInsets.only(top: 10),
               child: Text("一个用来写写文章，发发照片的个人站点。"),
             ),
+            Footer(),
           ],
         ),
       ),
     );
   }
 
-  List<Widget> _buidTagList(List tags) {
+  List<Widget> _buildTagList(List tags) {
     final List<Widget> result = <Widget>[];
 
     for (int index = 0; index < tags.length; index++) {
@@ -130,7 +131,7 @@ class AboutPage extends StatelessWidget {
 
   Widget _buildTagItem(String tag) {
     return Padding(
-      padding: EdgeInsets.only(left: 3, right: 3,bottom: 10),
+      padding: EdgeInsets.only(left: 3, right: 3, bottom: 10),
       child: Container(
         padding: EdgeInsets.only(left: 7, right: 7, top: 3, bottom: 3),
         decoration: BoxDecoration(

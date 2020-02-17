@@ -64,6 +64,30 @@ Future<String> fetchPostContent(String postPath) async {
   return splitFrontMatter(respContent);
 }
 
+Future<PostInfoBean> fetchPostInfoByUrl(String url) async {
+  var dataUrl = "data/post_data.json";
+  var response = await http.get(dataUrl);
+
+  Utf8Decoder decoder = Utf8Decoder();
+  JsonDecoder jsonDecoder = JsonDecoder();
+  Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
+
+  List jsonList = respMap['data'];
+
+  List<PostInfoBean> postInfoList =
+      jsonList.map((e) => PostInfoBean.fromJson(e)).toList();
+  // 解析数据
+
+  if (postInfoList.length > 0) {
+    for (var item in postInfoList) {
+      if (item.url == url) {
+        return item;
+      }
+    }
+  }
+  return null;
+}
+
 String splitFrontMatter(String content) {
   var lines = content.split('\n');
   StringBuffer buffer = StringBuffer();

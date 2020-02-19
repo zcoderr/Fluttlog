@@ -1,10 +1,11 @@
 import 'package:blog/model/post_info.dart';
-import 'package:blog/pages/post/detail_page.dart';
 import 'package:blog/utils/colors.dart';
 import 'package:blog/viewmodels/post_list_view_model.dart';
 import 'package:blog/widgets/footer.dart';
+import 'package:blog/widgets/header_hero_image/header_hero_image.dart';
+import 'package:blog/widgets/header_hero_image/header_hero_image_desktop.dart';
 import 'package:flutter/material.dart';
-
+import 'package:blog/bus.dart';
 import 'package:blog/datamodels/data_util.dart' as dataUtils;
 import 'package:provider_architecture/provider_architecture.dart';
 
@@ -22,9 +23,30 @@ class EssayList extends StatefulWidget {
 class EssayListState extends State<EssayList> {
   List<PostInfoBean> _posts = [];
 
+  ScrollController _controller;
+  bool _active = false;
+
+  _scrollListener() {
+    if (_controller.offset < 435) {
+      if (_active) {
+        _active = false;
+        print("hide action bar");
+        bus.emit(EVENT_NAV_TRANSLATE, true);
+      }
+    } else {
+      if (!_active) {
+        _active = true;
+        print("show action bar");
+        bus.emit(EVENT_NAV_TRANSLATE, false);
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _controller = ScrollController();
+    _controller.addListener(_scrollListener);
     initData();
   }
 
@@ -45,13 +67,19 @@ class EssayListState extends State<EssayList> {
         builder: (context, model, child) => ScrollConfiguration(
               behavior: OverScrollBehavior(),
               child: ListView.builder(
+                controller: _controller,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return index == _posts.length
-                      ? Footer()
-                      : _buildListItem(_posts[index], model);
+                  if (index == 0) {
+                    return HeaderHeroImage(
+                        "Post", "a little of description");
+                  } else if (index == _posts.length + 1) {
+                    return Footer();
+                  } else {
+                    return _buildListItem(_posts[index - 1], model);
+                  }
                 },
-                itemCount: _posts.length + 1,
+                itemCount: _posts.length + 2,
               ),
             ));
   }

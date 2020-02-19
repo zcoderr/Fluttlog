@@ -7,7 +7,7 @@ class Footer extends StatelessWidget {
     return Center(
       child: Container(
         constraints: BoxConstraints(maxWidth: 1000),
-        padding: EdgeInsets.only(top: 0, bottom: 0, left: 25, right: 25),
+        padding: EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
         child: Container(
           padding: EdgeInsets.only(top: 20),
           child: Text(

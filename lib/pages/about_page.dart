@@ -1,4 +1,6 @@
+import 'package:blog/widgets/centered_view/centered_view.dart';
 import 'package:blog/widgets/footer.dart';
+import 'package:blog/widgets/header_hero_image/header_hero_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/colors.dart';
@@ -10,13 +12,16 @@ class AboutPage extends StatelessWidget {
     return ScrollConfiguration(
       behavior: OverScrollBehavior(),
       child: ListView(
-        children: <Widget>[_maxAboutBody()],
+        children: <Widget>[
+          HeaderHeroImage("About", "Desc"),
+          _maxAboutBody()
+        ],
       ),
     );
   }
 
   Widget _maxAboutBody() {
-    return Center(
+    return CenteredView(
       child: Padding(
         padding: EdgeInsets.only(left: 20, right: 20),
         child: Column(

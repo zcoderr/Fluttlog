@@ -22,8 +22,8 @@ class FlutterBlog extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        // highlightColor: Colors.transparent,
-        // splashColor: Colors.transparent
+         highlightColor: Colors.transparent,
+         splashColor: Colors.transparent
       ),
       title: 'Zachary\'s Blog',
       builder: (context, child) => LayoutTemplate(

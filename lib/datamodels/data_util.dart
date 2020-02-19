@@ -40,6 +40,7 @@ Future<List<PostInfoBean>> fetchPostListInfo(String catalog) async {
 }
 
 Future<List<ProjectInfoBean>> fetchProjectListInfo() async {
+  print("lengthL获取数据");
   var url = "data/project_data.json";
   var response = await http.get(url);
 
@@ -48,7 +49,7 @@ Future<List<ProjectInfoBean>> fetchProjectListInfo() async {
   Map respMap = jsonDecoder.convert(decoder.convert(response.bodyBytes));
 
   List jsonList = respMap['data'];
-
+  print("respMap:"+response.toString());
   List<ProjectInfoBean> _projects =
       jsonList.map((e) => ProjectInfoBean.fromJson(e)).toList();
   return _projects;

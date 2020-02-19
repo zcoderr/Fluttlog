@@ -21,15 +21,13 @@ class LayoutTemplate extends StatelessWidget {
             ? NavigationDrawer()
             : null,
         backgroundColor: Colors.white,
-        body: CenteredView(
-          child: Column(
-            children: <Widget>[
-              NavigationBar(),
-              Expanded(
-                child: child,
-              ),
-            ],
-          ),
+        body: Stack(
+          children: <Widget>[
+            Expanded(
+              child: child,
+            ),
+            NavigationBar(),
+          ],
         ),
       ),
     );

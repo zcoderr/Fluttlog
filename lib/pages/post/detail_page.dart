@@ -32,12 +32,6 @@ class _DetailPageState extends State<DetailPage> {
 
   bool _active = false;
 
-  _handleActionBarState(bool active) {
-    setState(() {
-      _active = active;
-    });
-  }
-
   _scrollListener() {
     if (_controller.offset < 350) {
       print("hide action bar");

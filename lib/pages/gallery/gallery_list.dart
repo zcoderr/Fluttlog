@@ -1,8 +1,10 @@
+import 'package:blog/bus.dart';
 import 'package:blog/model/gallery_info.dart';
 import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/post/detail_page.dart';
 import 'package:blog/utils/colors.dart';
 import 'package:blog/widgets/footer.dart';
+import 'package:blog/widgets/header_hero_image/header_hero_image.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'package:blog/datamodels/data_util.dart' as dataUtils;
@@ -21,9 +23,30 @@ class GalleryList extends StatefulWidget {
 class GalleryListState extends State<GalleryList> {
   List<GalleryInfoBean> _galleryList = [];
 
+  ScrollController _controller;
+  bool _active = false;
+
+  _scrollListener() {
+    if (_controller.offset < 435) {
+      if (_active) {
+        _active = false;
+        print("hide action bar");
+        bus.emit(EVENT_NAV_TRANSLATE, true);
+      }
+    } else {
+      if (!_active) {
+        _active = true;
+        print("show action bar");
+        bus.emit(EVENT_NAV_TRANSLATE, false);
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _controller = ScrollController();
+    _controller.addListener(_scrollListener);
     initData();
   }
 
@@ -40,13 +63,18 @@ class GalleryListState extends State<GalleryList> {
     return ScrollConfiguration(
       behavior: OverScrollBehavior(),
       child: ListView.builder(
+        controller: _controller,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return index == _galleryList.length
-              ? Footer()
-              : _buildListItem(_galleryList[index]);
+          if (index == 0) {
+            return HeaderHeroImage("Gallery", "a little of description");
+          } else if (index == _galleryList.length + 1) {
+            return Footer();
+          } else {
+            return _buildListItem(_galleryList[index - 1]);
+          }
         },
-        itemCount: _galleryList.length + 1,
+        itemCount: _galleryList.length + 2,
       ),
     );
   }

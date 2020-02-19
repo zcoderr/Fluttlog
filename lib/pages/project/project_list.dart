@@ -2,6 +2,7 @@ import 'package:blog/model/project_info.dart';
 import 'package:blog/utils/colors.dart';
 import 'dart:html' as html;
 import 'package:blog/widgets/footer.dart';
+import 'package:blog/widgets/header_hero_image/header_hero_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +29,11 @@ class ProjectListState extends State<ProjectList> {
   }
 
   void initData() {
+    print("init");
     dataUtils.fetchProjectListInfo().then((List<ProjectInfoBean> list) {
       setState(() {
         _projects = list;
+        print("项目" + _projects.length.toString());
       });
     });
   }
@@ -42,16 +45,21 @@ class ProjectListState extends State<ProjectList> {
       child: ListView.builder(
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return index == _projects.length
-              ? Footer()
-              : _buildListItem(_projects[index]);
+          if (index == 0) {
+            return HeaderHeroImage("Project", "a little of description");
+          } else if (index == _projects.length + 1) {
+            return Footer();
+          } else {
+            return _buildListItem(_projects[index - 1]);
+          }
         },
-        itemCount: _projects.length + 1,
+        itemCount: _projects.length + 2,
       ),
     );
   }
 
   Widget _buildListItem(ProjectInfoBean item) {
+    print(item.title);
     return InkWell(
       onTap: () {
         toDetailPage(item);

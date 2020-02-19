@@ -8,7 +8,10 @@ class NavBarLogo extends StatelessWidget {
     return SizedBox(
       height: 50,
       width: 150,
-      child: Image.asset('assets/logo.png'),
+      child: Text(
+        "Zachary's Blog",
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

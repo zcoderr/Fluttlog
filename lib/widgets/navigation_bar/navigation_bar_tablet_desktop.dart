@@ -24,6 +24,7 @@ class NavigationBarDesktopState extends State<NavigationBarTabletDesktop> {
 
     return Container(
       decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(width: 1.0,color: _isTranslate ? Colors.transparent : Colors.grey.shade200,)),
         color: _isTranslate ? Colors.transparent : Colors.white,
       ),
       height: 65,

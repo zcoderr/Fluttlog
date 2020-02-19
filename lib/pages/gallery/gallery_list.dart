@@ -3,6 +3,7 @@ import 'package:blog/model/gallery_info.dart';
 import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/post/detail_page.dart';
 import 'package:blog/utils/colors.dart';
+import 'package:blog/widgets/centered_view/centered_view.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:blog/widgets/header_hero_image/header_hero_image.dart';
 import 'package:flutter/material.dart';
@@ -62,32 +63,41 @@ class GalleryListState extends State<GalleryList> {
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: OverScrollBehavior(),
-      child: ListView.builder(
+      child: ListView(
+        children: <Widget>[
+          HeaderHeroImage("Gallery", "a little of description"),
+          CenteredView(
+            child: GridView.count(
+              shrinkWrap: true,
+              // Create a grid with 2 columns. If you change the scrollDirection to
+              // horizontal, this produces 2 rows.
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+                childAspectRatio:3/2,
+              // Generate 100 widgets that display their index in the List.
+              children: List.generate(_galleryList.length, (index) {
+                return _buildListItem(_galleryList[index]);
+              }),
+            ),
+          ),
+          Footer(),
+        ],
         controller: _controller,
         shrinkWrap: true,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return HeaderHeroImage("Gallery", "a little of description");
-          } else if (index == _galleryList.length + 1) {
-            return Footer();
-          } else {
-            return _buildListItem(_galleryList[index - 1]);
-          }
-        },
-        itemCount: _galleryList.length + 2,
       ),
     );
   }
 
-  Widget _buildListItem(GalleryInfoBean galleryInfoBean) {
-    return InkWell(
+  Widget _buildListItem(GalleryInfoBean item) {
+    return GestureDetector(
       onTap: () {
-        //toDetailPage(post);
-        // setState(() {
-        //   currentPost = post;
-        // });
+        item.play_url == null ? null : html.window.open(item.play_url, "");
       },
-      child: buildMinPostCard(galleryInfoBean),
+      child: Image.network(
+        item.thumb,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -188,104 +198,7 @@ class GalleryListState extends State<GalleryList> {
     );
   }
 
-  Widget buildMinPostCard(GalleryInfoBean item) {
-    return InkWell(
-      onTap: () {
-        item.play_url == null ? null : html.window.open(item.play_url, "");
-      },
-      child: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 800),
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            elevation: 0.0,
-            shape: new RoundedRectangleBorder(
-              // 圆角
-              borderRadius: BorderRadius.all(
-                Radius.circular(0.0),
-              ),
-            ),
-            margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-            child: Column(
-              children: <Widget>[
-                item.play_url == null
-                    ? Image.network(item.thumb, fit: BoxFit.fitWidth)
-                    : _videoCover(item),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      item.play_url == null
-                          ? Container()
-                          : Image.asset(
-                              "images/icon_video.png",
-                              width: 20,
-                              height: 20,
-                            ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          item.title,
-                          style: TextStyle(
-                              fontSize: 23,
-                              color: ThemeColors.firstColor,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10, bottom: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        "images/icon_time.png",
-                        width: 15,
-                        height: 15,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 3),
-                        child: Text(
-                          item.time,
-                          style: TextStyle(
-                            color: Color(0xff999999),
-                            fontWeight: FontWeight.w100,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Image.asset(
-                          "images/icon_location.png",
-                          width: 15,
-                          height: 15,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 3),
-                        child: Text(
-                          item.location,
-                          style: TextStyle(
-                            color: Color(0xff999999),
-                            fontWeight: FontWeight.w100,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  Widget buildMinPostCard(GalleryInfoBean item) {}
 
   Widget _videoCover(GalleryInfoBean item) {
     return Stack(

@@ -61,7 +61,7 @@ class _DetailPageState extends State<PostDetailView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.only(top: 120),
                       child: Text(
                         _postInfoBean.title,
                         style: TextStyle(

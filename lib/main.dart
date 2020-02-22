@@ -16,15 +16,21 @@ void main() {
   runApp(FlutterBlog());
 }
 
-class FlutterBlog extends StatelessWidget {
+class FlutterBlog extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return FlutterBlogState();
+  }
+}
+
+class FlutterBlogState extends State<FlutterBlog> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-         highlightColor: Colors.transparent,
-         splashColor: Colors.transparent
-      ),
+          primarySwatch: Colors.blue,
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent),
       title: 'Zachary\'s Blog',
       builder: (context, child) => LayoutTemplate(
         child: child,

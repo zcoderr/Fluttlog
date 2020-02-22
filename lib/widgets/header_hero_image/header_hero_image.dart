@@ -1,4 +1,5 @@
 import 'package:blog/widgets/header_hero_image/header_hero_image_desktop.dart';
+import 'package:blog/widgets/header_hero_image/header_hero_image_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -11,8 +12,8 @@ class HeaderHeroImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
-      mobile: HeaderHeroImageDesktop(title, desc),
-      tablet: HeaderHeroImageDesktop(title, desc),
+      mobile: HeaderHeroImageMobile(title, desc),
+      desktop: HeaderHeroImageDesktop(title, desc),
     );
   }
 }

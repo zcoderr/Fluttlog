@@ -42,8 +42,8 @@ class NewNavBarItemDesktopState extends State<NewNavBarItemDesktop> {
         // SERVICES SHOULD ONLY BE USED FROM A VIEWMODEL
         locator<NavigationService>().navigateTo(widget.navigationPath);
         bus.emit(EVENT_NAV_TRANSLATE,true);
-        if (Scaffold.of(context).isDrawerOpen) {
-          Scaffold.of(context).openEndDrawer();
+        if (Scaffold.of(context).isEndDrawerOpen) {
+          Scaffold.of(context).openDrawer();
         }
       },
       child: Provider.value(

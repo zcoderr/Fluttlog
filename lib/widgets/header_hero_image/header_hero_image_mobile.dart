@@ -2,22 +2,20 @@ import 'dart:math';
 
 import 'package:blog/common.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
-class HeaderHeroImageDesktop extends StatelessWidget {
+class HeaderHeroImageMobile extends StatelessWidget {
   final String title;
   final String desc;
   static String _randomA = Random().nextInt(182).toString();
   static String _randomB = Random().nextInt(10).toString();
 
-  const HeaderHeroImageDesktop(this.title, this.desc, {Key key})
-      : super(key: key);
+  const HeaderHeroImageMobile(this.title, this.desc, {Key key});
 
   @override
   Widget build(BuildContext context) {
-    common.headerHeight = 500 - 65;
+    common.headerHeight = 400 - 50;
     return Container(
-      height: 500,
+      height: 400,
       padding: EdgeInsets.only(bottom: 20),
       child: Stack(
         fit: StackFit.passthrough,
@@ -29,7 +27,7 @@ class HeaderHeroImageDesktop extends StatelessWidget {
                 "/" +
                 _randomB +
                 "/thumb.jpg",
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.cover,
             height: 500,
           ),
           Container(

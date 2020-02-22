@@ -1,3 +1,4 @@
+import 'package:blog/common.dart';
 import 'package:blog/model/post_info.dart';
 import 'package:blog/utils/colors.dart';
 import 'package:blog/viewmodels/post_list_view_model.dart';
@@ -27,7 +28,7 @@ class EssayListState extends State<EssayList> {
   bool _active = false;
 
   _scrollListener() {
-    if (_controller.offset < 435) {
+    if (_controller.offset < common.headerHeight) {
       if (_active) {
         _active = false;
         print("hide action bar");
@@ -71,8 +72,7 @@ class EssayListState extends State<EssayList> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return HeaderHeroImage(
-                        "Post", "a little of description");
+                    return HeaderHeroImage("Post", "a little of description");
                   } else if (index == _posts.length + 1) {
                     return Footer();
                   } else {

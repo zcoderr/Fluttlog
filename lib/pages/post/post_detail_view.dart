@@ -3,7 +3,6 @@ import 'package:blog/utils/colors.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:blog/bus.dart';
 import 'package:markdown/markdown.dart' as markdown;
 import 'package:flutter_html/flutter_html.dart' as flutter_html;

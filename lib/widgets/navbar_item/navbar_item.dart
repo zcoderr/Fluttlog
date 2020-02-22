@@ -27,14 +27,14 @@ class NavBarItem extends StatelessWidget {
         // DON'T EVER USE A SERVICE DIRECTLY IN THE UI TO CHANGE ANY KIND OF STATE
         // SERVICES SHOULD ONLY BE USED FROM A VIEWMODEL
         locator<NavigationService>().navigateTo(navigationPath);
-        if (Scaffold.of(context).isDrawerOpen) {
-          Scaffold.of(context).openEndDrawer();
+        if (Scaffold.of(context).isEndDrawerOpen) {
+          Scaffold.of(context).openDrawer();
         }
       },
       child: Provider.value(
         value: model,
         child: ScreenTypeLayout(
-          tablet: NavBarItemTabletDesktop(),
+          tablet: NavBarItemMobile(),
           mobile: NavBarItemMobile(),
         ),
       ),

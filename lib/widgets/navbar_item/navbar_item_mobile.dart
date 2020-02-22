@@ -5,18 +5,25 @@ import 'package:provider_architecture/provider_widget.dart';
 class NavBarItemMobile extends ProviderWidget<NavBarItemModel> {
   @override
   Widget build(BuildContext context, NavBarItemModel model) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30, top: 60),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+      ),
+      padding: const EdgeInsets.only(top: 20, bottom: 20),
       child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Icon(model.iconData),
           SizedBox(
             width: 30,
           ),
-          Text(
-            model.title,
-            style: TextStyle(fontSize: 18),
-          )
+          Container(
+            child: Text(
+              model.title,
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
         ],
       ),
     );

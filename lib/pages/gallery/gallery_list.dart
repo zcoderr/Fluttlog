@@ -1,4 +1,5 @@
 import 'package:blog/bus.dart';
+import 'package:blog/common.dart';
 import 'package:blog/model/gallery_info.dart';
 import 'package:blog/model/post_info.dart';
 import 'package:blog/pages/post/detail_page.dart';
@@ -28,7 +29,7 @@ class GalleryListState extends State<GalleryList> {
   bool _active = false;
 
   _scrollListener() {
-    if (_controller.offset < 435) {
+    if (_controller.offset < common.headerHeight) {
       if (_active) {
         _active = false;
         print("hide action bar");

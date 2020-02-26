@@ -64,7 +64,7 @@ class AboutPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: Text(
-                  '''一个目前主业 Android，做着独立产品梦的开发者。\n自认为略懂产品，略懂设计，并且对个人效率和协作效率有强迫症式的执念。\n能写 Android 能写 iOS，能写前端和后台，能写 Python、Shell、 Golang 的伪全栈。'''),
+                  '''一个啥都想搞的 Android 开发者。\n略懂产品，略懂设计，对个人效率和协作效率有强迫症式的执念。\n能写 Android 能写 iOS，能写前端和后台，能写 Python、Shell、 Golang 的伪全栈。'''),
             ),
 //            Padding(
 //              padding: EdgeInsets.only(top: 20, bottom: 10),
@@ -121,9 +121,11 @@ class AboutPage extends StatelessWidget {
                       text: "本站是使用 Flutter for web 编写的静态网站，已经踩平响应式、路由管理等坑，详见"),
                   TextSpan(
                     text: " 仓库地址。 ",
-                    recognizer: TapGestureRecognizer()..onTap = () {
-                      html.window.open("https://github.com/zcoderr/Fluttlog", "");
-                    },
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        html.window
+                            .open("https://github.com/zcoderr/Fluttlog", "");
+                      },
                     style: TextStyle(color: ThemeColors.secondaryColor),
                   ),
                 ]),

@@ -60,7 +60,7 @@ class ProjectListState extends State<ProjectList> {
 
   Widget _buildListItem(ProjectInfoBean item) {
     print(item.title);
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         toDetailPage(item);
       },

@@ -85,7 +85,7 @@ class EssayListState extends State<EssayList> {
   }
 
   Widget _buildListItem(PostInfoBean post, PostListViewModel model) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         //toDetailPage(post);
         // setState(() {

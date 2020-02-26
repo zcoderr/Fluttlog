@@ -1,6 +1,7 @@
 import 'package:blog/widgets/centered_view/centered_view.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:blog/widgets/header_hero_image/header_hero_image.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/colors.dart';
@@ -12,10 +13,7 @@ class AboutPage extends StatelessWidget {
     return ScrollConfiguration(
       behavior: OverScrollBehavior(),
       child: ListView(
-        children: <Widget>[
-          HeaderHeroImage("About", "Desc"),
-          _maxAboutBody()
-        ],
+        children: <Widget>[HeaderHeroImage("About", "Desc"), _maxAboutBody()],
       ),
     );
   }
@@ -68,13 +66,13 @@ class AboutPage extends StatelessWidget {
               child: Text(
                   '''一个目前主业 Android，做着独立产品梦的开发者。\n自认为略懂产品，略懂设计，并且对个人效率和协作效率有强迫症式的执念。\n能写 Android 能写 iOS，能写前端和后台，能写 Python、Shell、 Golang 的伪全栈。'''),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 10),
-              child: Text(
-                'Experience',
-                style: TextStyle(fontSize: FontSize.fontSizeSubTitleMax),
-              ),
-            ),
+//            Padding(
+//              padding: EdgeInsets.only(top: 20, bottom: 10),
+//              child: Text(
+//                'Experience',
+//                style: TextStyle(fontSize: FontSize.fontSizeSubTitleMax),
+//              ),
+//            ),
 //            ProjectInfoSection(
 //                "十点文化传播有限公司",
 //                "高级 Android 开发工程师",
@@ -92,21 +90,21 @@ class AboutPage extends StatelessWidget {
 //                style: TextStyle(fontSize: FontSize.fontSizeSubTitleMax),
 //              ),
 //            ),
-            Wrap(
-              children: _buildTagList([
-                'Java',
-                'Dart',
-                'Python',
-                'GoLang',
-                'Android',
-                'Flutter',
-                'Spring',
-                'iOS',
-                'Shell',
-                'Linux',
-                'Git'
-              ]),
-            ),
+//            Wrap(
+//              children: _buildTagList([
+//                'Java',
+//                'Dart',
+//                'Python',
+//                'GoLang',
+//                'Android',
+//                'Flutter',
+//                'Spring',
+//                'iOS',
+//                'Shell',
+//                'Linux',
+//                'Git'
+//              ]),
+//            ),
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Text(
@@ -116,7 +114,20 @@ class AboutPage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),
-              child: Text("一个用来写写文章，发发照片的个人站点。"),
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      style: TextStyle(color: ThemeColors.firstColor),
+                      text: "本站是使用 Flutter for web 编写的静态网站，已经踩平响应式、路由管理等坑，详见"),
+                  TextSpan(
+                    text: " 仓库地址。 ",
+                    recognizer: TapGestureRecognizer()..onTap = () {
+                      html.window.open("https://github.com/zcoderr/Fluttlog", "");
+                    },
+                    style: TextStyle(color: ThemeColors.secondaryColor),
+                  ),
+                ]),
+              ),
             ),
             Footer(),
           ],

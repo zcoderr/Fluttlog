@@ -63,25 +63,28 @@ class EssayListState extends State<EssayList> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<PostListViewModel>.withConsumer(
-        viewModel: PostListViewModel(),
-        builder: (context, model, child) => ScrollConfiguration(
-              behavior: OverScrollBehavior(),
-              child: ListView.builder(
-                controller: _controller,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return HeaderHeroImage("Post", "a little of description");
-                  } else if (index == _posts.length + 1) {
-                    return Footer();
-                  } else {
-                    return _buildListItem(_posts[index - 1], model);
-                  }
-                },
-                itemCount: _posts.length + 2,
-              ),
-            ));
+    return Container(
+      color: Colors.grey.shade50,
+      child: ViewModelProvider<PostListViewModel>.withConsumer(
+          viewModel: PostListViewModel(),
+          builder: (context, model, child) => ScrollConfiguration(
+                behavior: OverScrollBehavior(),
+                child: ListView.builder(
+                  controller: _controller,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return HeaderHeroImage("Post", "a little of description");
+                    } else if (index == _posts.length + 1) {
+                      return Footer();
+                    } else {
+                      return _buildListItem(_posts[index - 1], model);
+                    }
+                  },
+                  itemCount: _posts.length + 2,
+                ),
+              )),
+    );
   }
 
   Widget _buildListItem(PostInfoBean post, PostListViewModel model) {
@@ -124,7 +127,6 @@ class EssayListState extends State<EssayList> {
         constraints: BoxConstraints(maxWidth: 1000),
         child: Card(
           // 卡片
-          color: Colors.grey.shade50,
           margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
           clipBehavior: Clip.antiAlias,
           elevation: 0,
@@ -209,7 +211,7 @@ class EssayListState extends State<EssayList> {
 
   Widget buildMinPostCard(PostInfoBean post) {
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+      margin: EdgeInsets.only(left: 5, right: 5),
       child: Center(
         child: Container(
           constraints: BoxConstraints(maxWidth: 1000),

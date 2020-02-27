@@ -1,3 +1,4 @@
+import 'package:blog/bus.dart';
 import 'package:blog/datamodels/navbar_item_model.dart';
 import 'package:blog/locator.dart';
 import 'package:blog/services/navigation_service.dart';
@@ -27,6 +28,7 @@ class NavBarItem extends StatelessWidget {
         // DON'T EVER USE A SERVICE DIRECTLY IN THE UI TO CHANGE ANY KIND OF STATE
         // SERVICES SHOULD ONLY BE USED FROM A VIEWMODEL
         locator<NavigationService>().navigateTo(navigationPath);
+        bus.emit(EVENT_NAV_TRANSLATE, true);
         if (Scaffold.of(context).isEndDrawerOpen) {
           Scaffold.of(context).openDrawer();
         }

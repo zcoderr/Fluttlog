@@ -16,7 +16,6 @@ class HeaderHeroImageMobile extends StatelessWidget {
     common.headerHeight = 400 - 50;
     return Container(
       height: 400,
-      padding: EdgeInsets.only(bottom: 20),
       child: Stack(
         fit: StackFit.passthrough,
         alignment: Alignment.topCenter,

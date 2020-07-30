@@ -37,6 +37,7 @@ class _DetailPageState extends State<PostDetailView> {
       dataUtils.fetchPostContent(postInfoBean.path).then((String postContent) {
         setState(() {
           _postContent = postContent;
+          print("bbbb"+_postContent);
         });
       });
       setState(() {

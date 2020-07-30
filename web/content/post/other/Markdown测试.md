@@ -3,7 +3,7 @@ title: Markdown 测试
 desc: 使用 * 和 ** 表示斜体和粗体。
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/88/6/thumb.jpg
 location: Beijing
-time: 2019-10-22
+time: 2015-10-22
 catalog: 技术日志
 tags:
 ---

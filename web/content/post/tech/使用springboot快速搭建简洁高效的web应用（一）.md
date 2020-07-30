@@ -1,11 +1,11 @@
 ---
-title: SpringBoot 初探
+title: SpringBoot初探
 desc: Spring的繁琐的配置简直是每个项目开始的时候都会吐槽的地方，特别是对于较为小型的项目，或者是个人项目，过于繁琐的配置就更显得多余了。Spring boot是Spring推出的一个轻量化web框架，主要解决了Spring对于小型项目饱受诟病的配置和开发速度问题。
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/95/2/thumb.jpg
 location: Beijing
-time: 2019-10-26
+time: 2016-10-26
 catalog: 技术日志
-tags:['Markdown','Blog']
+tags:['Blog']
 ---
 
 　　Spring的繁琐的配置简直是每个项目开始的时候都会吐槽的地方，特别是对于较为小型的项目，或者是个人项目，过于繁琐的配置就更显得多余了。Spring boot是Spring推出的一个轻量化web框架，主要解决了Spring对于小型项目饱受诟病的配置和开发速度问题。

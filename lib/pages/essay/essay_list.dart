@@ -4,7 +4,6 @@ import 'package:blog/utils/colors.dart';
 import 'package:blog/viewmodels/post_list_view_model.dart';
 import 'package:blog/widgets/footer.dart';
 import 'package:blog/widgets/header_hero_image/header_hero_image.dart';
-import 'package:blog/widgets/header_hero_image/header_hero_image_desktop.dart';
 import 'package:flutter/material.dart';
 import 'package:blog/bus.dart';
 import 'package:blog/datamodels/data_util.dart' as dataUtils;
@@ -66,7 +65,10 @@ class EssayListState extends State<EssayList> {
     return Container(
       color: Colors.grey.shade50,
       child: ViewModelProvider<PostListViewModel>.withConsumer(
-          viewModel: PostListViewModel(),
+        // viewModelBuilder: (){
+        //   return PostListViewModel();
+        // },
+        viewModel: PostListViewModel(),
           builder: (context, model, child) => ScrollConfiguration(
                 behavior: OverScrollBehavior(),
                 child: ListView.builder(
@@ -74,7 +76,7 @@ class EssayListState extends State<EssayList> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return HeaderHeroImage("Post", "a little of description");
+                      return HeaderHero.post;
                     } else if (index == _posts.length + 1) {
                       return Footer();
                     } else {
@@ -331,7 +333,6 @@ class OverScrollBehavior extends ScrollBehavior {
     switch (getPlatform(context)) {
       case TargetPlatform.iOS:
         return child;
-      case TargetPlatform.macOS:
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         return GlowingOverscrollIndicator(

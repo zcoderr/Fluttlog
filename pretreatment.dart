@@ -16,9 +16,11 @@ void treatmentPost() async {
       postDir.list(recursive: true, followLinks: false);
 
   await for (FileSystemEntity entity in entityList) {
-    if (entity is File) {
+    if (entity is File && entity.path.endsWith(".md")) {
       await readFrontMatter(entity.path).then((map) {
         mapList.add(map);
+      }).catchError((err){
+        print(entity.path+"文件异常");
       });
     }
   }

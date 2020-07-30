@@ -1,6 +1,13 @@
 {
   "data": [
     {
+        "title": "动森旅行指南",
+        "desc": "动森旅行指南不断收集和整理动物之森/动物森友会的丰富信息，帮助岛民们更轻松的开始岛上生活。",
+        "logo": "https://storage-1251325576.cos.ap-beijing.myqcloud.com/blog/Icon.png",
+        "url": "https://apps.apple.com/cn/app/动森旅行指南/id1508861710",
+        "status": "App Store"
+      },
+    {
       "title": "MoBox-墨盒",
       "desc": "这是一款专门为独立开发者和设计师打造的优质设计资源聚合工具。",
       "logo": "https://storage-1251325576.cos.ap-beijing.myqcloud.com/default/clipboard_20200117034931.png",

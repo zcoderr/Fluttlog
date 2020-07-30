@@ -13,7 +13,7 @@ class AboutPage extends StatelessWidget {
     return ScrollConfiguration(
       behavior: OverScrollBehavior(),
       child: ListView(
-        children: <Widget>[HeaderHeroImage("About", "Desc"), _maxAboutBody()],
+        children: <Widget>[HeaderHero.about, _maxAboutBody()],
       ),
     );
   }
@@ -58,13 +58,13 @@ class AboutPage extends StatelessWidget {
                 _thirdPartIcon("images/icon_zhihu.png",
                     "https://www.zhihu.com/people/zachary-wang-53"),
                 _thirdPartIcon("images/icon_instagram.png",
-                    "https://www.instagram.com/zcoderrr/"),
+                    "https://www.instagram.com/zachary.seetheworld/"),
               ],
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: Text(
-                  '''一个不敬业的 Android 开发者。\n假装自己略懂产品，又略懂设计。\n能写前端能写后台，能写 Python、Shell、 Golang 又都不精通的伪全栈。'''),
+                  '''一个不敬业的 Android 开发者。\n以为自己略懂产品，又略懂设计。\n能写前端能写后台，能写 Python、Shell、 Golang 又都不精通的伪全栈。'''),
             ),
 //            Padding(
 //              padding: EdgeInsets.only(top: 20, bottom: 10),
@@ -261,7 +261,6 @@ class OverScrollBehavior extends ScrollBehavior {
     switch (getPlatform(context)) {
       case TargetPlatform.iOS:
         return child;
-      case TargetPlatform.macOS:
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         return GlowingOverscrollIndicator(

@@ -61,7 +61,7 @@ Future<String> fetchPostContent(String postPath) async {
 
   Utf8Decoder decoder = Utf8Decoder();
   String respContent = decoder.convert(response.bodyBytes);
-
+  print("cccc"+postPath);
   return splitFrontMatter(respContent);
 }
 

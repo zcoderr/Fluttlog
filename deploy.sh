@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # !/bin/bash
 # 腾讯云服务器
-SERVER_IP="192.144.212.146"
+# 我的
+#SERVER_IP="192.144.212.146"
+
+# 冬冬的
+SERVER_IP="129.211.66.244"
 
 echo "Generate json data file..."
 dart pretreatment.dart
@@ -10,8 +14,8 @@ echo "Build flutter fo web"
 flutter build web
 
 echo "Uploading build file"
-ssh root@$SERVER_IP "rm -rf ~/html/"
-scp -r ./build/web/ root@$SERVER_IP:/root/html/
+ssh root@$SERVER_IP "rm -rf /usr/share/nginx/html"
+scp -r ./build/web/ root@$SERVER_IP:/usr/share/nginx/html
 
 echo "Deploy Success!!!"
 

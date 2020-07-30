@@ -1,6 +1,6 @@
 import 'package:blog/datamodels/navbar_item_model.dart';
 import 'package:flutter/material.dart';
-import 'package:provider_architecture/provider_widget.dart';
+import 'package:provider_architecture/provider_architecture.dart';
 
 class NavBarItemMobile extends ProviderWidget<NavBarItemModel> {
   @override

@@ -48,17 +48,16 @@ class NewNavBarItemDesktopState extends State<NewNavBarItemDesktop> {
       },
       child: Provider.value(
         value: model,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              model.title,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: widget.isTranslate ? Colors.white : Colors.black),
-            ),
-          ],
+        child: Container(
+          decoration: BoxDecoration(color: Colors.transparent),
+          padding: EdgeInsets.all(5),
+          child: Text(
+            model.title,
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: widget.isTranslate ? Colors.white : Colors.black),
+          ),
         ).showCursorOnHover.moveUpOnHover,
       ),
     );

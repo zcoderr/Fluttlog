@@ -66,7 +66,7 @@ class GalleryListDesktopState extends State<GalleryListDesktop> {
       behavior: OverScrollBehavior(),
       child: ListView(
         children: <Widget>[
-          HeaderHeroImage("Gallery", "a little of description"),
+          HeaderHero.gallery,
           CenteredView(
             child: GridView.count(
               shrinkWrap: true,
@@ -267,9 +267,8 @@ class OverScrollBehavior extends ScrollBehavior {
       BuildContext context, Widget child, AxisDirection axisDirection) {
     switch (getPlatform(context)) {
       case TargetPlatform.iOS:
-        return child;
-      case TargetPlatform.macOS:
       case TargetPlatform.android:
+        return child;
       case TargetPlatform.fuchsia:
         return GlowingOverscrollIndicator(
           child: child,

@@ -42,61 +42,7 @@ class FlutterBlogState extends State<FlutterBlog> {
   }
 }
 
-class Site extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return SiteState();
-  }
-}
 
-class SiteState extends State<Site> {
-  int tabIndex = 0;
-  static final List<String> items = [
-    '文章',
-    '影像',
-    '项目',
-    '关于',
-  ];
-  static SiteTab siteTab = SiteTab(
-    tabTitles: items,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(top: 60),
-          child: IndexedStack(
-            children: <Widget>[
-              EssayList(
-                catalog: "all",
-              ),
-              GalleryList(),
-              ProjectList(),
-              //BookListView(),
-              AboutPage(),
-            ],
-            index: tabIndex,
-          ),
-        ),
-//        SiteBar(
-//          title: 'Zachary\'s Blog',
-//          desc: 'Just Empty！',
-//          tabs: siteTab.copyWith(
-//            tabTitles: items,
-//            onTap: (index) {
-//              setState(() {
-//                tabIndex = index;
-//              });
-//            },
-//            currentIndex: tabIndex,
-//          ),
-//        ),
-      ],
-    );
-  }
-}
 
 class SiteTab extends StatelessWidget {
   const SiteTab({

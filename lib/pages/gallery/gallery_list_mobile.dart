@@ -69,7 +69,7 @@ class GalleryListMobileState extends State<GalleryListMobile> {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           if (index == 0) {
-            return HeaderHeroImage("Post", "a little of description");
+            return HeaderHero.gallery;
           } else if (index == _galleryList.length + 1) {
             return Footer();
           } else {
@@ -104,7 +104,6 @@ class OverScrollBehavior extends ScrollBehavior {
     switch (getPlatform(context)) {
       case TargetPlatform.iOS:
         return child;
-      case TargetPlatform.macOS:
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         return GlowingOverscrollIndicator(

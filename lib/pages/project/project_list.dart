@@ -46,7 +46,7 @@ class ProjectListState extends State<ProjectList> {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           if (index == 0) {
-            return HeaderHeroImage("Project", "a little of description");
+            return HeaderHero.project;
           } else if (index == _projects.length + 1) {
             return Footer();
           } else {
@@ -292,7 +292,6 @@ class OverScrollBehavior extends ScrollBehavior {
     switch (getPlatform(context)) {
       case TargetPlatform.iOS:
         return child;
-      case TargetPlatform.macOS:
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         return GlowingOverscrollIndicator(

@@ -1,9 +1,9 @@
 ---
-title: 使用CDN
+title: 使用CDN加速博客访问速度和百度SEO
 desc: 多数情况下大家选择将hexo部署在github pages中，虽然具有完全免费而且一次部署无需维护的优势，但由于github服务器在境外，而且随着前段时间github屏蔽了百度爬虫的抓取，在国内的访问速度和百度搜索的呈现得不到保证，最方便的解决方案就是使用国内众多厂商都提供的CDN服务。
 thumb: http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/91/6/thumb.jpg
 location: Beijing
-time: 2019-10-24
+time: 2017-10-24
 catalog: 技术日志
 tags:['Markdown','Blog']
 ---

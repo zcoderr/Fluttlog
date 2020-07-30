@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:blog/common.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class HeaderHeroImageDesktop extends StatelessWidget {
   final String title;
   final String desc;
-  static String _randomA = Random().nextInt(182).toString();
-  static String _randomB = Random().nextInt(10).toString();
+  final String imgUrl;
 
-  const HeaderHeroImageDesktop(this.title, this.desc, {Key key})
+  const HeaderHeroImageDesktop(this.title, this.desc, this.imgUrl, {Key key})
       : super(key: key);
 
   @override
@@ -24,11 +24,7 @@ class HeaderHeroImageDesktop extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: <Widget>[
           Image.network(
-            "http://ppe.oss-cn-shenzhen.aliyuncs.com/collections/" +
-                _randomA +
-                "/" +
-                _randomB +
-                "/thumb.jpg",
+            imgUrl,
             fit: BoxFit.fitWidth,
             height: 500,
           ),
@@ -40,15 +36,17 @@ class HeaderHeroImageDesktop extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     title,
-                    style: TextStyle(
+                    style: GoogleFonts.pressStart2P(
                         color: Colors.white,
                         fontSize: 60,
                         fontWeight: FontWeight.bold),
                   ),
-//                Text(
-//                  desc,
-//                  style: TextStyle(color: Colors.white, fontSize: 25),
-//                ),
+                  SizedBox(height: 20),
+                  Text(
+                    desc,
+                    style: GoogleFonts.cabinSketch(
+                        color: Colors.white, fontSize: 30),
+                  ),
                 ],
               ),
             ),

@@ -55,12 +55,12 @@ class NavigationBarDesktopState extends State<NavigationBarTabletDesktop> {
                   width: 40,
                 ),
                 NewNavBarItemDesktop(
-                    'Gallery', GalleryRoute, _isTranslate, false),
+                    'Project', ProjectRoute, _isTranslate, false),
                 SizedBox(
                   width: 40,
                 ),
                 NewNavBarItemDesktop(
-                    'Project', ProjectRoute, _isTranslate, false),
+                    'Gallery', GalleryRoute, _isTranslate, false),
                 SizedBox(
                   width: 40,
                 ),

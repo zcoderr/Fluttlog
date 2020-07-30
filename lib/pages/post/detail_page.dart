@@ -149,6 +149,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Widget _buildPostBody() {
+
     return Center(
       child: Container(
         constraints: BoxConstraints(maxWidth: 1000),
